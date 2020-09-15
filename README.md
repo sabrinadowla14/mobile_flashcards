@@ -39,3 +39,7 @@
   [react-native-asyncstorage](https://blog.jscrambler.com/how-to-use-react-native-asyncstorage/)
   [adding and removing items from redux store](https://medium.com/@ralph1786/adding-and-removing-items-from-redux-store-6d1303ed32c6)
   [[example of navigation]](https://appdividend.com/2018/03/20/react-native-navigation-example-tutorial/)
+<<<<<<< HEAD
+=======
+
+>>>>>>> 78d4d98c36830ac79cd1193a9dd5b5d68ccc0c2a
