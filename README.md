@@ -8,8 +8,7 @@
   i
 
 ## ios - CMD + D to open the Developer Menu
-
-## Andriod - CMD + M to open the Developer Menu
+## Used ios only
 
 ### Software Installed
 
