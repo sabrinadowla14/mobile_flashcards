@@ -14,7 +14,7 @@ class Decks extends Component {
             Key={deck.title}
             deck_title={deck.title}
             navigation={this.props.navigation}
-            totalNoOfCards={deck.questions.length}
+            totalNoOfCards={questions ? deck.questions.length : null}
           />
         </ScrollView>
       </SafeAreaView>
@@ -23,7 +23,7 @@ class Decks extends Component {
 }
 
 const mapStateToProps = (state, { props }) => {
-  const { id } = props.match.params;
+  const { id } = props.route.params;
   const { decks } = state.decks;
   return {
     deck: decks ? decks[id] : null,

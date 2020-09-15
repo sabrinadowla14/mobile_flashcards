@@ -6,11 +6,13 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Decks from "./components/Decks";
 import DecksDetails from "./components/DecksDetails";
+import AddNewCard from "./components/AddNewCard";
+import AddNewDeck from "./components/AddNewDeck";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
-//import reducer from "./reducers/index";
+import reducer from "./reducers/index";
 
-//import middleware from "./middleware";
+import middleware from "./middleware";
 
 import { createStore } from "redux";
 
@@ -29,6 +31,8 @@ function MyTabs() {
     <Tab.Navigator>
       <Tab.Screen name="Decks" component={Decks} />
       <Tab.Screen name="DecksDetails" component={DecksDetails} />
+      <Tab.Screen name="AddNewCard" component={AddNewCard} />
+      <Tab.Screen name="AddNewDeck" component={AddNewDeck} />
     </Tab.Navigator>
   );
 }
@@ -36,6 +40,8 @@ const StackNavigator = () => (
   <Stack.Navigator>
     <Stack.Screen name="Decks" component={Decks} />
     <Stack.Screen name="DecksDetails" component={DecksDetails} />
+    <Stack.Screen name="AddNewCard" component={AddNewCard} />
+    <Stack.Screen name="AddNewDeck" component={AddNewDeck} />
   </Stack.Navigator>
 );
 

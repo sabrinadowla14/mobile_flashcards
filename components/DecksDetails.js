@@ -4,12 +4,17 @@ import { connect } from "react-redux";
 
 class DecksDetails extends Component {
   state = {};
+
   handleNewCard = () => {
     this.props.navigation.navigate("AddNewCard", { deck: this.props.deck });
   };
 
   handleQuiz = () => {
     this.props.navigation.navigate("Quiz", { deck: this.props.deck });
+  };
+
+  handleDeleteDeck = () => {
+    this.props.navigation.navigate("DeleteDeck", { deck: this.props.deck });
   };
 
   render() {
@@ -20,6 +25,7 @@ class DecksDetails extends Component {
         <Text>Total {totalNoOfCards} Cards.</Text>
         <Button title="newCard" onPress={this.handleNewCard} />
         <Button title="quiz" onPress={this.handleQuiz} />
+        <Button title="deleteDeck" onPress={this.handleDeleteDeck} />
       </View>
     );
   }
