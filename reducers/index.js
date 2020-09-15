@@ -14,15 +14,14 @@ export default function questions(state = {}, action) {
       };
 
     case ADD_DECK:
+      const { title } = action;
       return {
         ...state,
-        [action.deck.id]: action.deck
+        [title]: {
+          title,
+          questions: []
+        }
       };
-    /*  case ADD_DECK:
-              return {
-                ...state,
-                ...action.deck,
-              }; */
 
     case ADD_CARD:
       return {

@@ -12,7 +12,7 @@ class Decks extends Component {
         <ScrollView style={styles.scrollView}>
           <DecksDetails
             Key={deck.title}
-            deck_title={deck.title}
+            title={deck.title}
             navigation={this.props.navigation}
             totalNoOfCards={questions ? deck.questions.length : null}
           />

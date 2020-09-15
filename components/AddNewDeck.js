@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { addDeck } from "../actions";
+import { saveDeckTitle } from "../utils/api";
 
 class AddNewDeck extends Component {
   state = {
@@ -25,13 +26,27 @@ class AddNewDeck extends Component {
   handleDeckTitleSubmit = e => {
     e.preventDefault();
     const { title } = this.state;
+    const currentTitle = Object.keys(this.props.decks).find(
+      title => title === this.state.title
+    );
 
-    this.props.addDeck(title);
-    this.setState({
-      title: ""
-    });
-    this.props.navigation.navigate("DecksDetails");
-  };
+    if (title) {
+      if (currentTitle === title) {
+        Alert.alert("Title exists, find another title");
+      } else {
+        This.props.addDeck(title);
+        saveDeckTitle(title);
+        Alert.alert(`Deck ${title} created!`);
+        this.setState({
+          title: ""
+        });
+        This.props.navigation.navigate(DeckDetails, {
+          title: title
+        });
+        this.props.navigation.goBack();
+      }
+    }
+  }; //handleDeckTitleSubmit
   render() {
     const { title } = this.state;
     return (
@@ -52,6 +67,13 @@ class AddNewDeck extends Component {
       </View>
     );
   }
+}
+
+function mapStateToProps(state, { props }) {
+  return {
+    deck_id: props.route.params,
+    decks: state.decks
+  };
 }
 
 function mapDispatchToProps(dispatch) {

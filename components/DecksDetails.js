@@ -7,14 +7,17 @@ class DecksDetails extends Component {
 
   handleNewCard = () => {
     this.props.navigation.navigate("AddNewCard", { deck: this.props.deck });
+    this.props.navigation.goBack();
   };
 
   handleQuiz = () => {
     this.props.navigation.navigate("Quiz", { deck: this.props.deck });
+    this.props.navigation.goBack();
   };
 
   handleDeleteDeck = () => {
     this.props.navigation.navigate("DeleteDeck", { deck: this.props.deck });
+    this.props.navigation.goBack();
   };
 
   render() {

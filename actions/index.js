@@ -44,9 +44,7 @@ export function getAllDecks() {
   };
 }
 
-export function addDeck(deck) {
-  return {
-    type: ADD_DECK,
-    deck
-  };
-}
+export const addDeck = title => ({
+  type: ADD_DECK,
+  title
+});

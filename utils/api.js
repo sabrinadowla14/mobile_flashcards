@@ -62,6 +62,22 @@ export const addCardToDeck = async (title, card) => {
   }
 };
 
+/*export const saveCard = (deckId, card) => {
+  return AsyncStorage.mergeItem(STORAGE_KEY).then(results => {
+    const data = JSON.parse(results);
+
+    // Add card to existing deck data.
+    data[deckId] = {
+      ...data[deckId],
+      cards: [
+        ...data[deckId].cards,
+        { question: card.question, answer: card.answer }
+      ]
+    };
+    AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  });
+}; */
+
 //Delete a particular Deck
 export const removeDeck = async key => {
   try {

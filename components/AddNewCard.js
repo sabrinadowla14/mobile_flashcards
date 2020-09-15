@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { addCard } from "../actions";
+import { addCardToDeck } from "../utils/api";
 
 class AddNewCard extends Component {
   state = {
@@ -26,13 +27,15 @@ class AddNewCard extends Component {
   handleCardSubmit = e => {
     e.preventDefault();
     const { questions, answers } = this.state;
-    const { deck } = this.props;
+    const { deck, card } = this.props;
     this.props.addCard(questions, answers, deck);
+    addCardToDeck(deck, card);
     this.setState({
       questions: "",
       answers: ""
     });
     this.props.navigation.navigate("DecksDetails");
+    this.props.navigation.goBack();
   };
   render() {
     const { questions, answers } = this.state;
@@ -66,6 +69,8 @@ function mapStateToProps(state, props) {
   const { decks } = state.decks;
   return {
     deck: decks ? decks[id] : null,
+    card: deck.card,
+
     id
   };
 }
