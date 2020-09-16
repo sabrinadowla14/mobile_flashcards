@@ -1,26 +1,34 @@
 import React, { Component } from "react";
-import { View, StyleSheet, Text, SafeAreaView, ScrollView } from "react-native";
+import {
+  Button,
+  View,
+  StyleSheet,
+  Text,
+  SafeAreaView,
+  ScrollView
+} from "react-native";
 import { connect } from "react-redux";
 import DecksDetails from "./DecksDetails";
-import { getAllDecks } from "../actions";
+import { handleInitialData } from "../actions";
 
 class Decks extends Component {
   componentDidMount() {
-    this.props.getAllDecks();
+    this.props.handleInitialData();
   }
 
   render() {
-    const { deck } = this.props;
-
+    const { decksInfo } = this.props;
     return (
       <SafeAreaView style={styles.container}>
         <ScrollView style={styles.scrollView}>
-          <DecksDetails
-            Key={deck.title}
-            title={deck.title}
-            navigation={this.props.navigation}
-            totalNoOfCards={questions ? deck.questions.length : null}
-          />
+          {decksInfo.map(deck => (
+            <DecksDetails
+              id={deck.title}
+              title={deck.title}
+              navigation={this.props.navigation}
+              totalNoOfCards={deck.questions.length}
+            />
+          ))}
         </ScrollView>
       </SafeAreaView>
     );
@@ -28,18 +36,18 @@ class Decks extends Component {
 }
 
 const mapStateToProps = (state, { props }) => {
-  const { deck } = props.route.params;
-  const { decks } = state.decks;
+  //const { id } = props.route.params;
+  const { decks } = state;
+  //const { deckId } = props.navigation.state.params;
+  //const deck = decks[deckId];
+  const decksInfo = Object.values(decks);
   return {
-    deck
+    decksInfo: decksInfo !== undefined ? decksInfo : null
+    //deck
   };
 };
 
-const mapDispatchToProps = dispatch => ({
-  getAllDecks: () => dispatch(getAllDecks())
-});
-
-export default connect(mapStateToProps)(Deck);
+export default connect(mapStateToProps, { handleInitialData })(Decks);
 
 const styles = StyleSheet.create({
   container: {

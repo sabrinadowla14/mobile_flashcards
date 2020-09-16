@@ -15,6 +15,7 @@ export default function questions(state = {}, action) {
 
     case ADD_DECK:
       const { title } = action;
+
       return {
         ...state,
         [title]: {
@@ -24,23 +25,20 @@ export default function questions(state = {}, action) {
       };
 
     case ADD_CARD:
+      const { deckId, card } = action;
       return {
         ...state,
-        [action.deck.title]: {
-          ...action.deck,
-          questions: [
-            ...action.deck.questions,
-            {
-              question: action.question,
-              answer: action.answer
-            }
-          ]
+        [deckId]: {
+          ...state[deckId],
+          questions: [...state[deckId].questions].concat(card)
         }
       };
 
     case REMOVE_DECK:
+      const { id } = action;
+      const { [id]: value, ...restOfState } = state;
       return {
-        decks: [...state.decks.filter(deckId => deckId !== action.id)]
+        ...restOfState
       };
 
     default:

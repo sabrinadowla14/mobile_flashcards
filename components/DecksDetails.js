@@ -6,13 +6,13 @@ class DecksDetails extends Component {
   state = {};
 
   handleNewCard = () => {
-    this.props.navigation.navigate("AddNewCard", { deck: this.props.deck });
-    this.props.navigation.goBack();
+    const { deckId } = this.props.navigation.state.params;
+    this.props.navigation.navigate("AddNewCard", { deckId: deckId });
   };
 
   handleQuiz = () => {
-    this.props.navigation.navigate("Quiz", { deck: this.props.deck });
-    this.props.navigation.goBack();
+    const { deckId } = this.props.navigation.state.params;
+    this.props.navigation.navigate("Quiz", { deckId: deckId });
   };
 
   handleDeleteDeck = () => {

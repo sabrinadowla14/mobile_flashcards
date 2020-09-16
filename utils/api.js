@@ -9,7 +9,7 @@ export const getDecks = async () => {
 
     return getDecksData !== null
       ? JSON.parse(getDecksData)
-      : AsyncStorage.setItem(DECKS_KEY, JSON.stringify(startingData));
+      : AsyncStorage.setItem(DECKS_KEY, JSON.stringify(decks));
   } catch (e) {
     Alert.alert(e, "Did not find any decks");
     console.log(e);

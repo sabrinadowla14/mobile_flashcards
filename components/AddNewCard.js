@@ -65,10 +65,10 @@ class AddNewCard extends Component {
 }
 
 function mapStateToProps(state, props) {
-  const { deck } = props.route.params;
+  const { decks } = state;
 
   return {
-    deck: deck,
+    deck: decks[route.params.title],
     card: deck.card
   };
 }
