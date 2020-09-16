@@ -2,10 +2,15 @@ import React, { Component } from "react";
 import { View, StyleSheet, Text, SafeAreaView, ScrollView } from "react-native";
 import { connect } from "react-redux";
 import DecksDetails from "./DecksDetails";
+import { getAllDecks } from "../actions";
 
 class Decks extends Component {
+  componentDidMount() {
+    this.props.getAllDecks();
+  }
+
   render() {
-    const { id, deck } = this.props;
+    const { deck } = this.props;
 
     return (
       <SafeAreaView style={styles.container}>
@@ -23,13 +28,16 @@ class Decks extends Component {
 }
 
 const mapStateToProps = (state, { props }) => {
-  const { id } = props.route.params;
+  const { deck } = props.route.params;
   const { decks } = state.decks;
   return {
-    deck: decks ? decks[id] : null,
-    id
+    deck
   };
 };
+
+const mapDispatchToProps = dispatch => ({
+  getAllDecks: () => dispatch(getAllDecks())
+});
 
 export default connect(mapStateToProps)(Deck);
 

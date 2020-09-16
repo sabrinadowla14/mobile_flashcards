@@ -65,13 +65,11 @@ class AddNewCard extends Component {
 }
 
 function mapStateToProps(state, props) {
-  const { id } = props.match.params;
-  const { decks } = state.decks;
-  return {
-    deck: decks ? decks[id] : null,
-    card: deck.card,
+  const { deck } = props.route.params;
 
-    id
+  return {
+    deck: deck,
+    card: deck.card
   };
 }
 
@@ -82,4 +80,5 @@ function mapDispatchToProps(dispatch) {
     }
   };
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(AddNewCard);

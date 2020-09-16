@@ -21,10 +21,10 @@ class DecksDetails extends Component {
   };
 
   render() {
-    const { deck_title, navigation, totalNoOfCards, deck } = this.props;
+    const { title, navigation, totalNoOfCards, deck } = this.props;
     return (
       <View>
-        <Text> {deck_title}</Text>
+        <Text> {title}</Text>
         <Text>Total {totalNoOfCards} Cards.</Text>
         <Button title="newCard" onPress={this.handleNewCard} />
         <Button title="quiz" onPress={this.handleQuiz} />

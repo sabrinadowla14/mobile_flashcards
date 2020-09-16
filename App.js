@@ -15,6 +15,7 @@ import reducer from "./reducers/index";
 import middleware from "./middleware";
 
 import { createStore } from "redux";
+import { setLocalNotification } from "./utils/helpers";
 
 /* create Redux Store */
 //const store = createStore(reducer, middleware);
@@ -45,14 +46,22 @@ const StackNavigator = () => (
   </Stack.Navigator>
 );
 
-export default function App() {
-  return (
-    <Provider store={store}>
-      <NavigationContainer>
-        <StackNavigator />
-      </NavigationContainer>
-    </Provider>
-  );
+export default class App extends React.Component {
+  componentDidMount() {
+    setLocalNotification();
+  }
+
+  render() {
+    return (
+      <Provider store={store}>
+        <View style={{ flex: 1 }}>
+          <NavigationContainer>
+            <StackNavigator />
+          </NavigationContainer>
+        </View>
+      </Provider>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
