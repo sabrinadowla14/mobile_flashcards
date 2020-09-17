@@ -43,7 +43,6 @@ class AddNewDeck extends Component {
         This.props.navigation.navigate(DeckDetails, {
           title: title
         });
-        this.props.navigation.goBack();
       }
     }
   }; //handleDeckTitleSubmit
@@ -69,13 +68,6 @@ class AddNewDeck extends Component {
   }
 }
 
-function mapStateToProps(state, { props }) {
-  return {
-    deck_id: props.route.params,
-    decks: state.decks
-  };
-}
-
 function mapDispatchToProps(dispatch) {
   return {
     addDeck: title => {
@@ -83,4 +75,5 @@ function mapDispatchToProps(dispatch) {
     }
   };
 }
+
 export default connect(null, mapDispatchToProps)(AddNewDeck);

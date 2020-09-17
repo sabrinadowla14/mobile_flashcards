@@ -24,13 +24,27 @@ export default function questions(state = {}, action) {
         }
       };
 
-    case ADD_CARD:
+    /*case ADD_CARD:
       const { deckId, card } = action;
       return {
         ...state,
         [deckId]: {
           ...state[deckId],
           questions: [...state[deckId].questions].concat(card)
+        }
+      };*/
+    case ADD_CARD:
+      return {
+        ...state,
+        [action.deck.title]: {
+          ...action.deck,
+          questions: [
+            ...action.deck.questions,
+            {
+              question: action.question,
+              answer: action.answer
+            }
+          ]
         }
       };
 

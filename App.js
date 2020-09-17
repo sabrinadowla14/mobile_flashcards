@@ -5,7 +5,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Decks from "./components/Decks";
-import DecksDetails from "./components/DecksDetails";
+import DecksDetails from "./components/Decks";
 import AddNewCard from "./components/AddNewCard";
 import AddNewDeck from "./components/AddNewDeck";
 import { NavigationContainer } from "@react-navigation/native";
@@ -14,15 +14,19 @@ import reducer from "./reducers/index";
 
 import middleware from "./middleware";
 
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import { setLocalNotification } from "./utils/helpers";
+import thunk from "redux-thunk";
+import { enableScreens } from "react-native-screens";
+
+enableScreens();
 
 /* create Redux Store */
 //const store = createStore(reducer, middleware);
 const rootReducer = (state = {}, action) => {
   return state;
 };
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();

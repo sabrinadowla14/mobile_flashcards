@@ -8,22 +8,21 @@ import {
   ScrollView
 } from "react-native";
 import { connect } from "react-redux";
-
+import DecksDetails from "./DecksDetails";
 import { handleInitialData } from "../actions";
-import Decks from "./Decks";
 
-class DecksDetails extends Component {
+class Decks extends Component {
   componentDidMount() {
     this.props.handleInitialData();
   }
 
   render() {
-    const { decksInfo, deck, decks } = this.props;
+    const { decksInfo } = this.props;
     return (
       <SafeAreaView style={styles.container}>
         <ScrollView style={styles.scrollView}>
           {decksInfo.map(deck => (
-            <Decks
+            <DecksDetails
               id={deck.title}
               title={deck.title}
               navigation={this.props.navigation}
@@ -42,17 +41,13 @@ const mapStateToProps = (state, { props }) => {
 
   //const deck = decks[deckId];
   const decksInfo = Object.values(decks || {});
-  const deck = Object.keys(decksInfo).map((key, i) => {
-    decksInfo[key];
-  });
   return {
-    decksInfo: decksInfo !== undefined ? decksInfo : null,
-    decks,
-    deck
+    decksInfo: decksInfo !== undefined ? decksInfo : null
+    //deck
   };
 };
 
-export default connect(mapStateToProps)(DecksDetails);
+export default connect(mapStateToProps, { handleInitialData })(Decks);
 
 const styles = StyleSheet.create({
   container: {

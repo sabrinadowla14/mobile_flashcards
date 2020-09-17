@@ -29,12 +29,12 @@ class AddNewCard extends Component {
     const { questions, answers } = this.state;
     const { deck, card } = this.props;
     this.props.addCard(questions, answers, deck);
-    addCardToDeck(deck, card);
+    //addCardToDeck(deck, card);
     this.setState({
       questions: "",
       answers: ""
     });
-    this.props.navigation.navigate("DecksDetails");
+    this.props.navigation.navigate("Decks");
     this.props.navigation.goBack();
   };
   render() {
@@ -66,9 +66,14 @@ class AddNewCard extends Component {
 
 function mapStateToProps(state, props) {
   const { decks } = state;
+  //const { id } = props.route.params.id;
+  const decksInfo = Object.values(decks || {});
+  const deck = Object.keys(decksInfo).map((key, i) => {
+    decksInfo[key];
+  });
 
   return {
-    deck: decks[route.params.title],
+    deck: decks[id],
     card: deck.card
   };
 }

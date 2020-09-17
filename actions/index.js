@@ -18,16 +18,26 @@ export function receiveDecks(decks) {
   };
 }
 
-export const addCardToDeck = (deckId, card) => ({
+/*export const addCardToDeck = (deckId, card) => ({
   type: ADD_CARD,
   deckId,
   card
-});
+}); */
+
+export function addCard(question, answer, deck) {
+  return {
+    type: ADD_CARD,
+    question,
+    answer,
+    deck
+  };
+}
 
 export const removeDeck = id => ({
   type: REMOVE_DECK,
   id
 });
+
 export function getAllDecks() {
   return dispatch => {
     getDecks().then(decks => {
