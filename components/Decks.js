@@ -15,13 +15,12 @@ class Decks extends Component {
 
   handleQuiz = () => {
     //const { deckId } = this.props.routes.params.id;
-    this.props.navigation.navigate("Quiz", { deckId: id });
-    this.props.navigation.goBack();
+
+    this.props.navigation.navigate("Quiz", { deckId: this.props.id });
   };
 
   handleDeleteDeck = () => {
-    this.props.navigation.navigate("DeleteDeck", { deckId: id });
-    this.props.navigation.goBack();
+    this.props.navigation.navigate("DeleteDeck", { deckId: this.props.id });
   };
 
   render() {
@@ -30,9 +29,9 @@ class Decks extends Component {
       <View>
         <Text> {title}</Text>
         <Text>Total {totalNoOfCards} Cards.</Text>
-        <Button title="newCard" onPress={this.handleNewCard} />
-        <Button title="quiz" onPress={this.handleQuiz} />
-        <Button title="deleteDeck" onPress={this.handleDeleteDeck} />
+        <Button title="New Card" onPress={this.handleNewCard} />
+        <Button title="Quiz" onPress={this.handleQuiz} />
+        <Button title="Delete Deck" onPress={this.handleDeleteDeck} />
       </View>
     );
   }

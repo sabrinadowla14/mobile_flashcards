@@ -52,7 +52,7 @@ const mapStateToProps = (state, { props }) => {
   };
 };
 
-export default connect(mapStateToProps)(DecksDetails);
+export default connect(mapStateToProps, { handleInitialData })(DecksDetails);
 
 const styles = StyleSheet.create({
   container: {

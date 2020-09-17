@@ -5,7 +5,8 @@ import {
   Text,
   SafeAreaView,
   ScrollView,
-  TextInput
+  TextInput,
+  Button
 } from "react-native";
 import { connect } from "react-redux";
 import { addDeck } from "../actions";
@@ -49,10 +50,9 @@ class AddNewDeck extends Component {
   render() {
     const { title } = this.state;
     return (
-      <View style={styles.container}>
+      <View>
         <Text> Add New Deck </Text>
         <TextInput
-          style={styles.input}
           placeholder="Title Please"
           placeholderTextColor="#9a73ef"
           onChangeText={this.handleInputTitleChange}
