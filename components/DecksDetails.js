@@ -24,7 +24,7 @@ class DecksDetails extends Component {
         <ScrollView style={styles.scrollView}>
           {decksInfo.map(deck => (
             <Decks
-              id={deck.title}
+              //id={deck.title}
               title={deck.title}
               navigation={this.props.navigation}
               totalNoOfCards={deck.questions.length}

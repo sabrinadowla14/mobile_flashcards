@@ -1,13 +1,14 @@
 import React, { Component } from "react";
-import { View, Text, Button } from "react-native";
+import { StyleSheet, View, Text, Button } from "react-native";
 import { connect } from "react-redux";
+import { white } from "../utils/colors";
 
 class Decks extends Component {
   state = {};
 
   handleNewCard = () => {
     this.props.navigation.navigate("AddNewCard", {
-      deckId: this.props.deck.id
+      //deckId: this.props.deck.id
       // decks: this.props.decks
     });
   };
@@ -58,3 +59,12 @@ class Decks extends Component {
 }; */
 
 export default connect()(Decks);
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    paddingTop: 35,
+    backgroundColor: white
+  }
+});

@@ -41,9 +41,9 @@ class AddNewDeck extends Component {
         this.setState({
           title: ""
         });
-        This.props.navigation.navigate(DeckDetails, {
+        /*This.props.navigation.navigate(Decks, {
           title: title
-        });
+        }); */
       }
     }
   }; //handleDeckTitleSubmit
