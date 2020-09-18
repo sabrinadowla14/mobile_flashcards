@@ -6,27 +6,28 @@ class Decks extends Component {
   state = {};
 
   handleNewCard = () => {
-    //const { deckId } = this.props.route.params.id;
     this.props.navigation.navigate("AddNewCard", {
-      deckId: this.props.deck.id,
-      decks: this.props.decks
+      deckId: this.props.deck.id
+      // decks: this.props.decks
     });
   };
 
   handleQuiz = () => {
     //const { deckId } = this.props.routes.params.id;
 
-    this.props.navigation.navigate("Quiz", { deckId: this.props.deckId });
+    this.props.navigation.navigate("Quiz", {
+      /*deckId: this.props.deckId */
+    });
   };
 
   handleDeleteDeck = () => {
     this.props.navigation.navigate("DeleteDeck", {
-      deckId: this.props.deckId
+      // deckId: this.props.deckId
     });
   };
 
   render() {
-    const { id, title, navigation, totalNoOfCards, decks, deck } = this.props;
+    const { title, navigation, totalNoOfCards, decks, deck } = this.props;
     return (
       <View>
         <Text> {title}</Text>
@@ -39,8 +40,8 @@ class Decks extends Component {
   }
 }
 
-const mapStateToProps = (state, { props }) => {
-  const { deckId } = props.route.params.id;
+/*const mapStateToProps = (state, { route }) => {
+  const { deckId } = route.params.id;
   const { decks } = state;
 
   //const deck = decks[deckId];
@@ -54,6 +55,6 @@ const mapStateToProps = (state, { props }) => {
     decks,
     deckId
   };
-};
+}; */
 
-export default connect(mapStateToProps)(Decks);
+export default connect()(Decks);
