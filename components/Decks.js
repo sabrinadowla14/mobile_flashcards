@@ -8,7 +8,7 @@ class Decks extends Component {
   handleNewCard = () => {
     //const { deckId } = this.props.route.params.id;
     this.props.navigation.navigate("AddNewCard", {
-      deckId: this.props.id,
+      deckId: this.props.deck.id,
       decks: this.props.decks
     });
   };
@@ -16,11 +16,13 @@ class Decks extends Component {
   handleQuiz = () => {
     //const { deckId } = this.props.routes.params.id;
 
-    this.props.navigation.navigate("Quiz", { deckId: this.props.id });
+    this.props.navigation.navigate("Quiz", { deckId: this.props.deckId });
   };
 
   handleDeleteDeck = () => {
-    this.props.navigation.navigate("DeleteDeck", { deckId: this.props.id });
+    this.props.navigation.navigate("DeleteDeck", {
+      deckId: this.props.deckId
+    });
   };
 
   render() {
@@ -38,7 +40,7 @@ class Decks extends Component {
 }
 
 const mapStateToProps = (state, { props }) => {
-  // const { deckId } = props.route.params.id
+  const { deckId } = props.route.params.id;
   const { decks } = state;
 
   //const deck = decks[deckId];
@@ -49,7 +51,8 @@ const mapStateToProps = (state, { props }) => {
 
   return {
     decksInfo: decksInfo !== undefined ? decksInfo : null,
-    decks
+    decks,
+    deckId
   };
 };
 
