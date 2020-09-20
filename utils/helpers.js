@@ -10,6 +10,17 @@ import {
 import { Notifications } from "expo";
 import * as Permissions from "expo-permissions";
 
+export function generateUID() {
+  return (
+    Math.random()
+      .toString(36)
+      .substring(2, 15) +
+    Math.random()
+      .toString(36)
+      .substring(2, 15)
+  );
+}
+
 const NOTIFICATION_KEY = "UdaciFitness:notifications";
 
 export function getDailyReminderValue() {

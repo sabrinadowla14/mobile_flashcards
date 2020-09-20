@@ -26,6 +26,7 @@ import { setLocalNotification } from "./utils/helpers";
 import thunk from "redux-thunk";
 import { enableScreens } from "react-native-screens";
 import DeleteDeck from "./components/DeleteDeck";
+import DecksView from "./components/DecksView";
 
 enableScreens();
 
@@ -36,10 +37,10 @@ const rootReducer = (state = {}, action) => {
 };
 const store = createStore(rootReducer, applyMiddleware(thunk));
 
-//const Tab = createBottomTabNavigator();
+const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
-/*const TabNavigator = () => (
+const TabNavigator = () => (
   <Tab.Navigator
     tabBarOptions={{
       activeBackgroundColor: "orange",
@@ -71,7 +72,7 @@ const Stack = createStackNavigator();
       }}
     />
   </Tab.Navigator>
-); */
+);
 const StackNavigator = () => (
   <Stack.Navigator
     screenOptions={{
@@ -79,8 +80,12 @@ const StackNavigator = () => (
       headerTintColor: "white"
     }}
   >
+    <Stack.Screen
+      name="DecksDetails"
+      component={DecksDetails}
+      options={{ title: "Deck" }}
+    />
     <Stack.Screen name="Decks" component={Decks} />
-    <Stack.Screen name="DecksDetails" component={DecksDetails} />
     <Stack.Screen name="AddNewCard" component={AddNewCard} />
     <Stack.Screen name="AddNewDeck" component={AddNewDeck} />
     <Stack.Screen name="Quiz" component={Quiz} />
@@ -98,7 +103,7 @@ export default class App extends React.Component {
       <Provider store={store}>
         <View style={{ flex: 1 }}>
           <NavigationContainer>
-            <StackNavigator />
+            <TabNavigator />
           </NavigationContainer>
         </View>
       </Provider>

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -6,54 +6,61 @@ import {
   SafeAreaView,
   ScrollView,
   TextInput,
-  Button
+  Button,
+  TouchableOpacity,
+  Alert
 } from "react-native";
 import { connect } from "react-redux";
-import { addDeck } from "../actions";
+import { handleAddDeck } from "../actions";
 import { saveDeckTitle } from "../utils/api";
+import DecksDetails from "./DecksDetails";
+import { white, blue, red } from "../utils/colors";
+import color from "../utils/colors";
 
 class AddNewDeck extends Component {
   state = {
     title: ""
   };
-  handleInputTitleChange = e => {
-    e.preventDefault();
-    const name = e.target.name;
-    const value = e.target.value;
+  handleInputTitleChange = title => {
+    //e.preventDefault();
+
     this.setState({
-      [name]: value
+      title
     });
   };
-  handleDeckTitleSubmit = e => {
-    e.preventDefault();
+  handleDeckTitleSubmit = () => {
+    // e.preventDefault();
     const { title } = this.state;
-    const currentTitle = Object.keys(this.props.decks).find(
-      title => title === this.state.title
-    );
+    const { decks } = this.props;
 
-    if (title) {
-      if (currentTitle === title) {
-        Alert.alert("Title exists, find another title");
-      } else {
-        This.props.addDeck(title);
-        saveDeckTitle(title);
-        Alert.alert(`Deck ${title} created!`);
-        this.setState({
-          title: ""
-        });
-        /*This.props.navigation.navigate(Decks, {
-          title: title
-        }); */
-      }
+    if (!title) {
+      Alert.alert("Please enter deck title");
+    } /*else if (decks[title]) {
+      Alert.alert("This deck exists - please choose another deck!"); }*/ else {
+      this.props.handleAddDeck(title);
+      saveDeckTitle(title);
+      Alert.alert(`${title} created!`);
+      this.setState({
+        title: ""
+      });
+
+      this.props.navigation.navigate("Home", {
+        deckId: title
+      });
     }
-  }; //handleDeckTitleSubmit
+  };
+
   render() {
     const { title } = this.state;
+    const { decks } = this.props;
     return (
-      <View>
+      <View style={styles.container}>
         <Text> Add New Deck </Text>
+
         <TextInput
+          style={styles.input}
           placeholder="Title Please"
+          value={this.state.title}
           placeholderTextColor="#9a73ef"
           onChangeText={this.handleInputTitleChange}
         />
@@ -68,12 +75,42 @@ class AddNewDeck extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  // const { deckId } = props.route.params.id
+  const { decks } = state;
+
+  return {
+    decks
+  };
+};
+
 function mapDispatchToProps(dispatch) {
   return {
-    addDeck: title => {
-      dispatch(addDeck(title));
+    handleAddDeck: title => {
+      dispatch(handleAddDeck(title));
     }
   };
 }
 
 export default connect(null, mapDispatchToProps)(AddNewDeck);
+
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 23
+  },
+  input: {
+    margin: 15,
+    height: 40,
+    borderColor: "#7a42f4",
+    borderWidth: 1
+  },
+  submitButton: {
+    backgroundColor: "#7a42f4",
+    padding: 10,
+    margin: 15,
+    height: 40
+  },
+  submitButtonText: {
+    color: "white"
+  }
+});

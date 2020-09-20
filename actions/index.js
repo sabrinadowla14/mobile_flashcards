@@ -1,4 +1,10 @@
-import { getDecks } from "../utils/api";
+import {
+  _getDecks,
+  saveDeckTitle,
+  _getDeck,
+  addCardToDeck,
+  _removeDeck
+} from "../utils/api";
 
 export const RECEIVE_DECKS = "RECEIVE_DECKS";
 export const ADD_DECK = "ADD_DECK";
@@ -24,19 +30,30 @@ export function receiveDecks(decks) {
   card
 }); */
 
-export function addCard(question, answer, deck) {
+/*export function addCard(question, answer, deck) {
   return {
     type: ADD_CARD,
     question,
     answer,
     deck
   };
+}*/
+
+export function addCard(title) {
+  return {
+    [title]: {
+      title: title,
+      questions: []
+    }
+  };
 }
 
-export const removeDeck = id => ({
-  type: REMOVE_DECK,
-  id
-});
+export function removeDeck(id) {
+  return {
+    type: REMOVE_DECK,
+    id
+  };
+}
 
 export function getAllDecks() {
   return dispatch => {
@@ -49,7 +66,23 @@ export function getAllDecks() {
   };
 }
 
-export const addDeck = title => ({
+export const addDeck = deck => ({
   type: ADD_DECK,
-  title
+  deck
 });
+
+/*export function handleAddDeck(key, deck) {
+  return dispatch => {
+    return saveDeckTitle(key, deck).then(res => {
+      dispatch(addDeck(res));
+    });
+  };
+} */
+
+export function handleAddDeck(deck) {
+  return dispatch => {
+    return saveDeckTitle(deck).then(res => {
+      dispatch(addDeck(res));
+    });
+  };
+}
