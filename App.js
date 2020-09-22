@@ -80,12 +80,10 @@ const StackNavigator = () => (
       headerTintColor: "white"
     }}
   >
-    <Stack.Screen
-      name="DecksDetails"
-      component={DecksDetails}
-      options={{ title: "Deck" }}
-    />
-    <Stack.Screen name="Decks" component={Decks} />
+    <Stack.Screen name="DecksDetails" component={DecksDetails} />
+    <Stack.Screen name="Decks" component={Decks} options={{ title: "Deck" }} />
+
+    <Stack.Screen name="DecksView" component={DecksView} />
     <Stack.Screen name="AddNewCard" component={AddNewCard} />
     <Stack.Screen name="AddNewDeck" component={AddNewDeck} />
     <Stack.Screen name="Quiz" component={Quiz} />

@@ -22,6 +22,7 @@
 - yarn add redux-logger
 - yarn add redux-thunk
 - yarn add -D expo-module-scripts
+- npm install --save @expo/vector-icons
 
 ## Redux
 

@@ -16,6 +16,7 @@ import { saveDeckTitle } from "../utils/api";
 import DecksDetails from "./DecksDetails";
 import { white, blue, red } from "../utils/colors";
 import color from "../utils/colors";
+import DecksView from "./DecksView";
 
 class AddNewDeck extends Component {
   state = {
@@ -40,13 +41,15 @@ class AddNewDeck extends Component {
       this.props.handleAddDeck(title);
       saveDeckTitle(title);
       Alert.alert(`${title} created!`);
+      //this.props.navigation.navigate("Decks", { deckId: this.state.title });
+      this.props.navigation.navigate("DecksView", { deckId: this.state.title });
       this.setState({
         title: ""
       });
 
-      this.props.navigation.navigate("Home", {
-        deckId: title
-      });
+      /* this.props.navigation.navigate("DecksView", {
+        title: title
+      });*/
     }
   };
 

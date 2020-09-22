@@ -39,12 +39,20 @@ export function receiveDecks(decks) {
   };
 }*/
 
-export function addCard(title) {
+/*export function addCard(title) {
   return {
     [title]: {
       title: title,
       questions: []
     }
+  };
+}*/
+
+export function addCard(card, deckId) {
+  return {
+    type: ADD_CARD,
+    card,
+    deckId
   };
 }
 
@@ -85,4 +93,17 @@ export function handleAddDeck(deck) {
       dispatch(addDeck(res));
     });
   };
+}
+
+export function deckObject(dTitle) {
+  return {
+    [dTitle]: {
+      title: dTitle,
+      questions: []
+    }
+  };
+}
+
+export function cardObject(question, answer) {
+  return { question, answer };
 }

@@ -8,8 +8,7 @@ class Decks extends Component {
 
   handleNewCard = () => {
     this.props.navigation.navigate("AddNewCard", {
-      //deckId: this.props.deck.id
-      // decks: this.props.decks
+      deckId: this.props.route.params.deckId
     });
   };
 
@@ -17,46 +16,46 @@ class Decks extends Component {
     //const { deckId } = this.props.routes.params.id;
 
     this.props.navigation.navigate("Quiz", {
-      /*deckId: this.props.deckId */
+      deckId: this.props.route.params.deckId
     });
   };
 
   handleDeleteDeck = () => {
     this.props.navigation.navigate("DeleteDeck", {
-      // deckId: this.props.deckId
+      deckId: this.props.route.params.deckId
     });
   };
 
   render() {
     const { title, navigation, totalNoOfCards, decks, deck } = this.props;
     return (
-      <View>
+      <View style="styles.container">
         <Text> {title}</Text>
         <Text>Total {totalNoOfCards} Cards.</Text>
-        <Button title="New Card" onPress={this.handleNewCard} />
-        <Button title="Quiz" onPress={this.handleQuiz} />
-        <Button title="Delete Deck" onPress={this.handleDeleteDeck} />
+        <TouchableOpacity title="New Card" onPress={this.handleNewCard} />
+        <TouchableOpacity title="Start Quiz" onPress={this.handleQuiz} />
+        <TouchableOpacity title="Delete Deck" onPress={this.handleDeleteDeck} />
       </View>
     );
   }
 }
 
-/*const mapStateToProps = (state, { route }) => {
-  const { deckId } = route.params.id;
+const mapStateToProps = (state, { props }) => {
+  const { deckId } = props.route.params.deckId;
   const { decks } = state;
 
   //const deck = decks[deckId];
-  const decksInfo = Object.values(decks || {});
-  const deck = Object.keys(decksInfo).map((key, i) => {
-    decksInfo[key];
-  });
+  // const decksInfo = Object.values(decks || {});
+  //const deck = Object.keys(decksInfo).map((key, i) => {
+  //  decksInfo[key];
+  //});
 
   return {
-    decksInfo: decksInfo !== undefined ? decksInfo : null,
+    //decksInfo: decksInfo !== undefined ? decksInfo : null,
     decks,
     deckId
   };
-}; */
+};
 
 export default connect()(Decks);
 

@@ -11,6 +11,7 @@ import {
 import { connect } from "react-redux";
 import { addCard } from "../actions";
 import { addCardToDeck } from "../utils/api";
+import { cardObject } from "../utils/api";
 import color from "../utils/colors";
 
 class AddNewCard extends Component {
@@ -28,11 +29,15 @@ class AddNewCard extends Component {
       answers
     });
   };
-  handleCardSubmit = () => {
+  handleCardSubmit = async () => {
     // e.preventDefault();
+    //const { deckId } = this.props.route.params.deckId;
     const { questions, answers } = this.state;
-    const { deck, card } = this.props;
-    this.props.addCard(questions, answers, deck);
+    const { card, addCard } = this.props;
+    await addCardToDeck(card, deckId);
+    addCard(card, deckId);
+    goBack();
+
     //addCardToDeck(deck, card);
     this.setState({
       questions: "",
@@ -42,20 +47,21 @@ class AddNewCard extends Component {
   };
   render() {
     const { questions, answers } = this.state;
+    const { deckId } = props.route.params.deckId;
     return (
       <View style={styles.container}>
-        <Text> AddNewCard </Text>
+        <Text> Add a New Card </Text>
         <TextInput
           style={styles.input}
           placeholder="Questions Please"
-          placeholderTextColor="#9a73ef"
-          onChangeText={this.handleInputOptChange}
+          placeholderTextColor="#5DADE2"
+          onChangeText={this.handleInputQustionChange}
         />
         <TextInput
           style={styles.input}
           placeholder="Answers Please"
           placeholderTextColor="#9a73ef"
-          onChangeText={this.handleInputOptChange}
+          onChangeText={this.handleInputAnswerChange}
         />
         <Button
           disabled={questions === "" || answers === ""}
@@ -69,22 +75,24 @@ class AddNewCard extends Component {
 
 function mapStateToProps(state, props) {
   const { decks } = state;
-  //const { id } = props.route.params.id;
-  const decksInfo = Object.values(decks || {});
-  const deck = Object.keys(decksInfo).map((key, i) => {
-    decksInfo[key];
-  });
+  //const { deckId } = props.route.params.deckId;
+  //const decksInfo = Object.values(decks || {});
+  //const deck = Object.keys(decksInfo).map((key, i) => {
+  //  decksInfo[key];
+  //});
 
   return {
-    //deck: decks[id],
-    card: deck.card
+    decks
+    //deckId
   };
 }
 
 function mapDispatchToProps(dispatch) {
+  const { question, answer } = this.state;
+  const card = cardObject(question, answer);
   return {
-    addCard: (questions, answers, deck) => {
-      dispatch(addCard(questions, answers, deck));
+    addCard: (card, deckId) => {
+      dispatch(addCard(card, deckId));
     }
   };
 }

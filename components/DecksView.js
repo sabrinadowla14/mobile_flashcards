@@ -10,23 +10,32 @@ import { connect } from "react-redux";
 import { white, gray, black } from "../utils/colors";
 
 class DecksView extends Component {
-  handleTouch = id => {
+  /* handleTouch = id => {
     navigation.navigate("DeckDetail", { id });
+  };*/
+  buttonPressed = e => {
+    this.props.navigation.navigate("DecksDetails", {
+      deckId: this.props.route.params.deckId
+    });
   };
   render() {
-    const { deck, decksInfo } = this.props;
+    const { cards } = this.props;
+    const { deckId } = this.props.route.params;
     return (
-      <View>
-        {decksInfo.map(deck => (
-          <View>
-            <Text>
-              {" "}
-              style={styles.titleList}
-              {deck.title}
-            </Text>
-            <Text>{deck.questions.length} cards</Text>
-          </View>
-        ))}
+      <View style={styles.container}>
+        <TouchableOpacity style={styles.button} onPress={this.buttonPressed}>
+          <Text
+            style={{
+              color: "lightslategrey",
+              fontWeight: "bold",
+              fontSize: 20,
+              paddingBottom: 20
+            }}
+          >
+            {deckId}
+          </Text>
+          <Text style={{ color: "lightslategrey", fontSize: 15 }}></Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -67,17 +76,19 @@ const styles = StyleSheet.create({
   }
 });
 
-function mapStateToProps({ state }) {
-  const decks = state;
-  const decksInfo = Object.values(decks || {});
-  const deck = Object.keys(decksInfo).map((key, i) => {
-    decksInfo[key];
-  });
+function mapStateToProps({ state, props }) {
+  const { deckId } = props.route.params.deckId;
+  const { decks } = state;
+  const { cards } = decks[deck.deckId];
+
   return {
     //decks: state,
     deck,
-    decksInfo
+    deckId,
+    cards: cards,
+    deck: decks[deckId],
+    title: deck.title
   };
 }
 
-export default connect(mapStateToProps)(DecksView);
+export default connect()(DecksView);

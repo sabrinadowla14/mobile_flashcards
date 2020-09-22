@@ -11,52 +11,53 @@ import { connect } from "react-redux";
 import { white } from "../utils/colors";
 
 import { handleInitialData } from "../actions";
-import Decks from "./Decks";
+import DecksView from "./DecksView";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 class DecksDetails extends Component {
   componentDidMount() {
     this.props.handleInitialData();
   }
+  handleDeckId = deckId => {
+    this.props.navigation.navigate("Decks", { deckId });
+  };
+
+  //handleDeckOnPress = (deckId) => this.props.navigation.navigate("Decks", {deckId});
 
   render() {
-    const { decksInfo, deck, decks, count } = this.props;
+    const { decks } = this.props;
     return (
       <SafeAreaView style={styles.container}>
         <ScrollView style={styles.scrollView}>
-          {decksInfo.length ? (
-            decksInfo.map(deck => (
-              <Decks
-                id={deck.title}
-                title={deck.title}
-                navigation={this.props.navigation}
-                totalNoOfCards={deck.questions.length}
-              />
-            ))
-          ) : (
-            <View style={[{ flex: 1 }, styles.container]}>
-              <View style={[{ flex: 1 }, styles.row]}>
-                <Text style={styles.noDataText}>You have no decks yet!</Text>
-              </View>
-            </View>
-          )}
+          {decks
+            ? Object.keys(decks).map(key => {
+                return;
+                <View key={decks[key].deckId}>
+                  <TouchableOpacity onPress={() => this.handleDeckId(deckId)}>
+                    <DecksView deck={decks[key]} />
+                    })
+                    <Text style={styles.Text}>{decks[key].deckTitle}</Text>
+                    <Text style={styles.Text}>{decks[key].cards.length}</Text>
+                  </TouchableOpacity>
+                </View>;
+              })
+            : null}
         </ScrollView>
       </SafeAreaView>
     );
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, props) => {
   // const { deckId } = props.route.params.id
   const { decks } = state;
-
+  //const { deckId } = this.props.route.params;
   //const deck = decks[deckId];
-  const decksInfo = Object.values(decks || {});
-  const deck = Object.keys(decksInfo).map((key, i) => {
-    decksInfo[key];
-  });
+  //const decksInfo = Object.values(decks || {});
+
   return {
-    decksInfo: decksInfo !== undefined ? decksInfo : null,
     decks
+    //deckId
   };
 };
 
@@ -64,29 +65,26 @@ export default connect(mapStateToProps, { handleInitialData })(DecksDetails);
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    justifyContent: "center",
+    paddingHorizontal: 10
+  },
+  button: {
+    alignItems: "center",
+    backgroundColor: "#DDDDDD",
+    padding: 10
+  },
+  countContainer: {
+    alignItems: "center",
+    padding: 10
   },
   scrollView: {
     backgroundColor: "pink",
     marginHorizontal: 20
   },
+
   text: {
-    fontSize: 42
-  },
-  row: {
-    backgroundColor: white,
-    borderRadius: 16,
-    padding: 20,
-    marginLeft: 10,
-    marginRight: 10,
-    marginBottom: 10,
-    justifyContent: "center",
-    shadowRadius: 3,
-    shadowOpacity: 0.8,
-    shadowColor: "rgba(0, 0, 0, 0.24)",
-    shadowOffset: {
-      width: 0,
-      height: 3
-    }
+    fontSize: 42,
+    textAlign: "center"
   }
 });
