@@ -26,6 +26,7 @@ class DecksDetails extends Component {
 
   render() {
     const { decks } = this.props;
+    //const { deckId } = this.props.route.params.deckId;
     return (
       <SafeAreaView style={styles.container}>
         <ScrollView style={styles.scrollView}>
@@ -35,9 +36,11 @@ class DecksDetails extends Component {
                 <View key={decks[key].deckId}>
                   <TouchableOpacity onPress={() => this.handleDeckId(deckId)}>
                     <DecksView deck={decks[key]} />
-                    })
-                    <Text style={styles.Text}>{decks[key].deckTitle}</Text>
-                    <Text style={styles.Text}>{decks[key].cards.length}</Text>
+
+                    <Text style={styles.Text}>{decks[key].deckId}</Text>
+                    <Text style={styles.Text}>
+                      {decks[key].questions.length}
+                    </Text>
                   </TouchableOpacity>
                 </View>;
               })
@@ -51,7 +54,7 @@ class DecksDetails extends Component {
 const mapStateToProps = (state, props) => {
   // const { deckId } = props.route.params.id
   const { decks } = state;
-  //const { deckId } = this.props.route.params;
+  //const { deckId } = this.props.route.params.deckId;
   //const deck = decks[deckId];
   //const decksInfo = Object.values(decks || {});
 

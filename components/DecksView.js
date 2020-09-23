@@ -14,9 +14,7 @@ class DecksView extends Component {
     navigation.navigate("DeckDetail", { id });
   };*/
   buttonPressed = e => {
-    this.props.navigation.navigate("DecksDetails", {
-      deckId: this.props.route.params.deckId
-    });
+    this.props.navigation.navigate("Decks", { deckId });
   };
   render() {
     const { cards } = this.props;
