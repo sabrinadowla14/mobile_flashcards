@@ -1,5 +1,5 @@
 Arguments: 
-  /Users/sabrinadowla/.nvm/versions/node/v12.14.1/bin/node /usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js add node_modules
+  /Users/sabrinadowla/.nvm/versions/node/v12.14.1/bin/node /usr/local/Cellar/yarn/1.22.4/libexec/bin/yarn.js add @react-navigation/native
 
 PATH: 
   /Users/sabrinadowla/.nvm/versions/node/v12.14.1/bin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/Library/Frameworks/Python.framework/Versions/3.8/bin:/Library/Frameworks/Python.framework/Versions/3.8/bin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Postgres.app/Contents/Versions/latest/bin:/Users/sabrinadowla/Library/Android/sdk/platform-tools:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Users/sabrinadowla/bin:/Users/sabrinadowla/Library/Android/sdk/:/Users/sabrinadowla/Library/Android/sdk/:/Users/sabrinadowla/Library/Android/sdk/:/Users/sabrinadowla/.npm-global/bin
@@ -14,17 +14,7 @@ Platform:
   darwin x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/node_modules: Not found
-      at Request.params.callback [as _callback] (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:66987:18)
-      at Request.self.callback (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:140748:22)
-      at Request.emit (events.js:223:5)
-      at Request.<anonymous> (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:141720:10)
-      at Request.emit (events.js:223:5)
-      at IncomingMessage.<anonymous> (/usr/local/Cellar/yarn/1.22.4/libexec/lib/cli.js:141642:12)
-      at Object.onceWrapper (events.js:312:28)
-      at IncomingMessage.emit (events.js:228:7)
-      at endReadableNT (_stream_readable.js:1185:12)
-      at processTicksAndRejections (internal/process/task_queues.js:81:21)
+  Error: EACCES: permission denied, unlink '/Users/sabrinadowla/Desktop/mobileFlashcards/mobile-flashcards/node_modules/.bin/acorn'
 
 npm manifest: 
   {
@@ -46,11 +36,12 @@ npm manifest:
       "@expo/vector-icons": "^10.2.1",
       "@react-native-community/masked-view": "0.1.10",
       "@react-navigation/bottom-tabs": "^5.8.0",
-      "@react-navigation/native": "5.3.2",
+      "@react-navigation/native": "^5.7.4",
       "@react-navigation/stack": "5.3.5",
       "body-parser": "^1.19.0",
       "expo": "~38.0.8",
       "expo-status-bar": "^1.0.2",
+      "ionic-native": "https://github.com/ionic-team/ionic-native/tarball/v3.5.0",
       "middleware-utils": "^1.0.0",
       "react": "~16.11.0",
       "react-dom": "~16.11.0",
@@ -69,7 +60,8 @@ npm manifest:
     "devDependencies": {
       "@babel/core": "^7.8.6",
       "babel-preset-expo": "~8.1.0",
-      "expo-module-scripts": "^1.2.0"
+      "expo-module-scripts": "^1.2.0",
+      "rm-npm": "0.0.9"
     },
     "private": true
   }
@@ -1448,29 +1440,30 @@ Lockfile:
       color "^3.1.2"
       react-native-iphone-x-helper "^1.2.1"
   
-  "@react-navigation/core@^5.6.1":
-    version "5.12.3"
-    resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-5.12.3.tgz#0484fcca290569a0dc10b70b99f00edd3f1fd93c"
-    integrity sha512-aEOTAw4FRRNsNu6F9ibLk3SVSs4Res8BI832NEZN6qUto5ZgtuYnQHWeWV2cZ43Nc9KvUyQC/vXvO2RScwgFwA==
+  "@react-navigation/core@^5.12.4":
+    version "5.12.4"
+    resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-5.12.4.tgz#1bd0c81d098895c8ffe49f8624fae60c9abc5684"
+    integrity sha512-vhaVIJGfSgln4dIoO4R2HeX9p3Vc7OJLa0/JpKHpXn/DZgNVn+RP7ktk1CRZ16ikUJ0k8CxzuvRxeRIg7EhA7w==
     dependencies:
-      "@react-navigation/routers" "^5.4.11"
+      "@react-navigation/routers" "^5.4.12"
       escape-string-regexp "^4.0.0"
       nanoid "^3.1.12"
       query-string "^6.13.1"
       react-is "^16.13.0"
       use-subscription "^1.4.0"
   
-  "@react-navigation/native@5.3.2":
-    version "5.3.2"
-    resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-5.3.2.tgz#31786ae160ab61ac609b2611306b728681016ada"
-    integrity sha512-F9UzCHNjBQSQLv2RNc4q+Uo/3hRx00CIrP6CPBcrDxLe318frN/LHWqh7Dd6rRm7OAvDFYKsniEluLqTPK3Y0w==
+  "@react-navigation/native@^5.7.4":
+    version "5.7.4"
+    resolved "https://registry.yarnpkg.com/@react-navigation/native/-/native-5.7.4.tgz#f55d54ab26942cf40fb3f6e1d6b9c26056e1d4e3"
+    integrity sha512-ndLojJZyWqxGdWeXlSr7ylHaMbBIwvoXnmsKHOMvUN6FV0dxv8b8L9T1yRW82b9mak4y6y6Q+1gIAWjO7FhAsQ==
     dependencies:
-      "@react-navigation/core" "^5.6.1"
+      "@react-navigation/core" "^5.12.4"
+      nanoid "^3.1.12"
   
-  "@react-navigation/routers@^5.4.11":
-    version "5.4.11"
-    resolved "https://registry.yarnpkg.com/@react-navigation/routers/-/routers-5.4.11.tgz#75dbec1809e282c3749068845099c5bee2c792f0"
-    integrity sha512-J/CsHdIjYBRe81UUiLOoz9NSrQ91uP23Oe21QPCALInRHx+rfwo2oPl6Fn8xAa7n8Dtt2oQUGyF+g5d05cB74w==
+  "@react-navigation/routers@^5.4.12":
+    version "5.4.12"
+    resolved "https://registry.yarnpkg.com/@react-navigation/routers/-/routers-5.4.12.tgz#5c3690650c94be3a54b617a1c07510d2f604c03f"
+    integrity sha512-IwMmxeb5e6LboljhakmhtrHBXLYFrFDr2c1GjAG538e4MjT4QGi/ZYckAxCh/NqKI0knnzqKppPl2NsOMv/NoQ==
     dependencies:
       nanoid "^3.1.12"
   
@@ -4382,6 +4375,10 @@ Lockfile:
     dependencies:
       loose-envify "^1.0.0"
   
+  "ionic-native@https://github.com/ionic-team/ionic-native/tarball/v3.5.0":
+    version "3.5.0"
+    resolved "https://github.com/ionic-team/ionic-native/tarball/v3.5.0#8619c7840b349c8f51bf9eef5f120c623c746f19"
+  
   ip@^1.1.5:
     version "1.1.5"
     resolved "https://registry.yarnpkg.com/ip/-/ip-1.1.5.tgz#bdded70114290828c0a039e72ef25f5aaec4354a"
@@ -7197,6 +7194,11 @@ Lockfile:
     version "2.2.8"
     resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"
     integrity sha1-5Dm+Kq7jJzIZUnMPmaiSnk/FBYI=
+  
+  rm-npm@0.0.9:
+    version "0.0.9"
+    resolved "https://registry.yarnpkg.com/rm-npm/-/rm-npm-0.0.9.tgz#c76cd9d80c62dcebb0fc6a835baba2a6c14e74d7"
+    integrity sha1-x2zZ2Axi3Ouw/GqDW6uipsFOdNc=
   
   rst-selector-parser@^2.2.3:
     version "2.2.3"
