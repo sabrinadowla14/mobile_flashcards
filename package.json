@@ -19,7 +19,6 @@
     "@react-navigation/bottom-tabs": "^5.8.0",
     "@react-navigation/native": "5.3.2",
     "@react-navigation/stack": "5.3.5",
-    "body-parser": "^1.19.0",
     "expo": "~38.0.8",
     "expo-status-bar": "^1.0.2",
     "ionic-native": "https://github.com/ionic-team/ionic-native/tarball/v3.5.0",
