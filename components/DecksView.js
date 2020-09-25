@@ -14,11 +14,12 @@ class DecksView extends Component {
     navigation.navigate("DeckDetail", { id });
   };*/
   buttonPressed = e => {
+    const deckId = this.props.deckId;
     this.props.navigation.navigate("Decks", { deckId });
   };
   render() {
     const { cards } = this.props;
-    const { deckId } = this.props.route.params;
+    const { deckId } = this.props.deckId;
     return (
       <View style={styles.container}>
         <TouchableOpacity style={styles.button} onPress={this.buttonPressed}>
@@ -75,18 +76,20 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps({ state, props }) {
-  const { deckId } = props.route.params.deckId;
+  //const { deckId } = props.route.params.deckId;
   const { decks } = state;
   const { cards } = decks[deck.deckId];
+  const { deckId } = this.props.deckId;
 
   return {
-    //decks: state,
-    deck,
-    deckId,
-    cards: cards,
-    deck: decks[deckId],
-    title: deck.title
+    decks,
+    //deck,
+    //deckId,
+    //cards: cards,
+    // deck: decks[deckId],
+    // title: deck.title,
+    deckId
   };
 }
 
-export default connect()(DecksView);
+export default connect(mapStateToProps)(DecksView);
