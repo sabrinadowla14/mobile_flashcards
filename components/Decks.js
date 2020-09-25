@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Text, Button } from "react-native";
+import {
+  Button,
+  View,
+  StyleSheet,
+  Text,
+  SafeAreaView,
+  ScrollView
+} from "react-native";
 import { connect } from "react-redux";
 import { white } from "../utils/colors";
 

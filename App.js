@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import "react-native-gesture-handler";
+//import SafeAreaView from "react-native-safe-area-view";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -59,8 +60,8 @@ const TabNavigator = () => (
       }}
     />
     <Tab.Screen
-      name="AddDeck"
-      component={AddNewDeck}
+      name="AddNewDeck"
+      component={AddNewCard}
       options={{
         tabBarIcon: ({ size }) => (
           <MaterialCommunityIcons
@@ -81,11 +82,11 @@ const StackNavigator = () => (
     }}
   >
     <Stack.Screen name="DecksView" component={DecksView} />
-    <Stack.Screen name="Decks" component={Decks} options={{ title: "Deck" }} />
+    <Stack.Screen name="Decks" component={Decks} />
     <Stack.Screen name="DecksDetails" component={DecksDetails} />
 
     <Stack.Screen name="AddNewCard" component={AddNewCard} />
-    <Stack.Screen name="AddNewDeck" component={AddNewDeck} />
+
     <Stack.Screen name="Quiz" component={Quiz} />
     <Stack.Screen name="DeleteDeck" component={DeleteDeck} />
   </Stack.Navigator>
