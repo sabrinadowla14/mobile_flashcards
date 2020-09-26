@@ -15,10 +15,11 @@ class DecksView extends Component {
   };*/
   buttonPressed = e => {
     const deckId = this.props.deckId;
+    const deck = this.props.deck;
     //this.props.navigation.navigate("Decks", { deckId });
   };
   render() {
-    const { cards } = this.props;
+    const { deck } = this.props.deck;
     const { deckId } = this.props.deckId;
     return (
       <View style={styles.container}>
@@ -33,7 +34,9 @@ class DecksView extends Component {
           >
             {deckId}
           </Text>
-          <Text style={{ color: "lightslategrey", fontSize: 15 }}></Text>
+          <Text style={{ color: "lightslategrey", fontSize: 15 }}>
+            {deck.questions.length}
+          </Text>
         </TouchableOpacity>
       </View>
     );
@@ -78,12 +81,12 @@ const styles = StyleSheet.create({
 function mapStateToProps({ state, props }) {
   //const { deckId } = props.route.params.deckId;
   const { decks } = state;
-  const { cards } = decks[deck.deckId];
+  const { deck } = this.props.deck;
   const { deckId } = this.props.deckId;
 
   return {
     decks,
-    //deck,
+    deck,
     //deckId,
     //cards: cards,
     // deck: decks[deckId],
