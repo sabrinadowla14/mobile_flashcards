@@ -15,7 +15,7 @@ class DecksView extends Component {
   };*/
   buttonPressed = e => {
     const deckId = this.props.deckId;
-    this.props.navigation.navigate("Decks", { deckId });
+    //this.props.navigation.navigate("Decks", { deckId });
   };
   render() {
     const { cards } = this.props;
