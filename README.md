@@ -13,6 +13,7 @@
 
 ### Software Installed
 
+- npm install @react-native-community/async-storage
 - expo install expo-notifications
 - expo install expo-permissions
 - expo install expo-constants

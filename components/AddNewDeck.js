@@ -12,8 +12,8 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { handleAddDeck } from "../actions";
-import { saveDeckTitle } from "../utils/api";
-import DecksDetails from "./DecksDetails";
+import { saveDeckTitleAsync } from "../utils/api";
+//import DecksDetails from "./DecksDetails";
 import { white, blue, red } from "../utils/colors";
 import color from "../utils/colors";
 
@@ -31,27 +31,23 @@ class AddNewDeck extends Component {
   handleDeckTitleSubmit = () => {
     // e.preventDefault();
     const { title } = this.state;
-    const { decks } = this.props;
-
-    if (!title) {
+    const { decks, deckTitle } = this.props;
+    const lenTitle = title.length;
+    // title exist
+    if (lenTitle > 0) {
+      if (deckTitle === undefined) {
+        this.props.handleAddDeck(title);
+        saveDeckTitleAsync(title);
+        Alert.alert(`${title} created!`);
+        this.props.navigation.navigate("Decks", { itemId: this.state.title });
+      }
+    } else if (!title) {
       Alert.alert("Please enter deck title");
-    } /*else if (decks[title]) {
-      Alert.alert("This deck exists - please choose another deck!"); }*/ else {
-      this.props.handleAddDeck(title);
-      saveDeckTitle(title);
-      Alert.alert(`${title} created!`);
-      //this.props.navigation.navigate("Decks", { deckId: this.state.title });
-      this.props.navigation.navigate("DecksDetails", {
-        deckId: this.state.title
-      });
-      this.setState({
-        title: ""
-      });
-
-      /* this.props.navigation.navigate("DecksView", {
-        title: title
-      });*/
     }
+
+    this.setState({
+      title: ""
+    });
   };
 
   render() {
@@ -82,9 +78,13 @@ class AddNewDeck extends Component {
 const mapStateToProps = state => {
   // const { deckId } = props.route.params.id
   const { decks } = state;
+  const deckTitle = decks
+    ? Object.values(decks).map(deck => ({ deck: deck.title }))
+    : null;
 
   return {
-    decks
+    decks,
+    deckTitle
   };
 };
 
@@ -96,7 +96,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(AddNewDeck);
+export default connect(mapStateToProps, mapDispatchToProps)(AddNewDeck);
 
 const styles = StyleSheet.create({
   container: {

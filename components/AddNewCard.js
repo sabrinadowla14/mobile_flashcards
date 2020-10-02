@@ -31,7 +31,7 @@ class AddNewCard extends Component {
   };
   handleCardSubmit = async () => {
     // e.preventDefault();
-    //const { deckId } = this.props.route.params.deckId;
+    const { deckId } = this.props.route.params.deckId;
     const { questions, answers } = this.state;
     const { card, addCard } = this.props;
     await addCardToDeck(card, deckId);
@@ -47,10 +47,10 @@ class AddNewCard extends Component {
   };
   render() {
     const { questions, answers } = this.state;
-    const { deckId } = props.route.params.deckId;
+    const { deckId } = this.props.route.params.deckId;
     return (
       <View style={styles.container}>
-        <Text> Add a New Card </Text>
+        <Text> Add a New Card to {deckId} </Text>
         <TextInput
           style={styles.input}
           placeholder="Questions Please"

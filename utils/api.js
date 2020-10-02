@@ -1,5 +1,5 @@
 import { decks } from "./_DATA";
-import { AsyncStorage } from "react-native";
+import AsyncStorage from "@react-native-community/async-storage";
 import { generateID } from "./helpers";
 
 const DECK_KEY = "Flashcards:decks";
@@ -8,13 +8,39 @@ export async function removeAllDecks() {
   await AsyncStorage.clear();
 }
 
-export async function getDecks() {
+/* export async function getDecks() {
   let decksData = await AsyncStorage.getItem(DECK_KEY);
   return JSON.parse(decksData);
-}
-export async function saveDeckTitle(deck) {
+} */
+// get all decks
+export const getDecksAsync = async () => {
+  try {
+    const decksData = await AsyncStorage.getItem(DECK_KEY);
+    return decksData !== null
+      ? JSON.parse(decksData)
+      : AsyncStorage.setItem(DECK_KEY, JSON.stringify(decks));
+  } catch (e) {
+    alert.alert("Decks Data not available");
+  }
+};
+
+// get one deck
+export const getDeckAsync = async deckId => {
+  try {
+    const deckData = await AsyncStorage.getItem(DECK_KEY);
+    return deckData !== null ? JSON.parse(deckData) : null;
+  } catch (e) {
+    alert.alert("Did not find the single deck!");
+  }
+};
+// save deck title
+/*export async function saveDeckTitle(deck) {
   await AsyncStorage.mergeItem(DECKS_KEY, JSON.stringify(deck));
-}
+} */
+
+export const saveDeckTitleAsync = async deck => {
+  await AsyncStorage.mergeItem(DECKS_KEY, JSON.stringify(deck));
+};
 export async function addCardToDeck(card, deckId) {
   const decksData = await AsyncStorage.getItem(DECKS_KEY);
   const decks = JSON.parse(decksData);
@@ -112,10 +138,25 @@ export async function addCardToDeck(card, deckId) {
   };
 }*/
 
-export async function removeDeck(deckId) {
+/*export async function removeDeck(deckId) {
   const decksData = await AsyncStorage.getItem(DECK_KEY);
   const decks = JSON.parse(decksData);
   decks[deckId] = undefined;
   delete decks[deckId];
   await AsyncStorage.setItem(DECKS_KEY, JSON.stringify(decks));
-}
+} */
+
+// delete a deck
+export const removeDeckAsync = async deckId => {
+  try {
+    const decksData = await AsyncStorage.getItem(DECK_KEY);
+    const decks = JSON.parse(decksData);
+    decks[deckId] = undefined;
+    delete decks[deckId];
+    await AsyncStorage.setItem(DECKS_KEY, JSON.stringify(decks)).then(() =>
+      alert.alert("Not able to delete the deck!")
+    );
+  } catch (e) {
+    alert.alert();
+  }
+};

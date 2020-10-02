@@ -15,8 +15,7 @@ class Decks extends Component {
 
   handleNewCard = () => {
     this.props.navigation.navigate("AddNewCard", {
-      deckId: this.props.route.params
-      // decks: this.props.decks
+      itemId: this.props.route.params.itemId
     });
   };
 
@@ -24,13 +23,13 @@ class Decks extends Component {
     //const { deckId } = this.props.routes.params.id;
 
     this.props.navigation.navigate("Quiz", {
-      /*deckId: this.props.deckId */
+      itemId: this.props.route.params.itemId
     });
   };
 
   handleDeleteDeck = () => {
     this.props.navigation.navigate("DeleteDeck", {
-      // deckId: this.props.deckId
+      itemId: this.props.route.params.itemId
     });
   };
 

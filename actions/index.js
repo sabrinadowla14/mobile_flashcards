@@ -1,9 +1,9 @@
 import {
-  _getDecks,
+  getDecksAsync,
   saveDeckTitle,
-  _getDeck,
+  getDeckAsync,
   addCardToDeck,
-  _removeDeck
+  removeDeckAsync
 } from "../utils/api";
 
 export const RECEIVE_DECKS = "RECEIVE_DECKS";
@@ -11,18 +11,23 @@ export const ADD_DECK = "ADD_DECK";
 export const ADD_CARD = "ADD_CARD";
 export const REMOVE_DECK = "REMOVE_DECK";
 
-//handle initial data
-export const handleInitialData = () => async dispatch => {
-  const response = await getDecks();
-  dispatch(receiveDecks(response));
-};
-
 export function receiveDecks(decks) {
   return {
     type: RECEIVE_DECKS,
     decks
   };
 }
+
+//handle initial data
+export const handleInitialData = () => async dispatch => {
+  const response = await getDecksAsync();
+  dispatch(receiveDecks(response));
+};
+
+export const addDeck = title => ({
+  type: ADD_DECK,
+  title
+});
 
 /*export const addCardToDeck = (deckId, card) => ({
   type: ADD_CARD,
@@ -48,18 +53,18 @@ export function receiveDecks(decks) {
   };
 }*/
 
-export function addCard(card, deckId) {
+export function addCard(deckId, card) {
   return {
     type: ADD_CARD,
-    card,
-    deckId
+    deckId,
+    card
   };
 }
 
-export function removeDeck(id) {
+export function removeDeck(deckId) {
   return {
     type: REMOVE_DECK,
-    id
+    deckId
   };
 }
 
@@ -74,11 +79,6 @@ export function getAllDecks() {
   };
 }
 
-export const addDeck = deck => ({
-  type: ADD_DECK,
-  deck
-});
-
 /*export function handleAddDeck(key, deck) {
   return dispatch => {
     return saveDeckTitle(key, deck).then(res => {
@@ -89,7 +89,7 @@ export const addDeck = deck => ({
 
 export function handleAddDeck(deck) {
   return dispatch => {
-    return saveDeckTitle(deck).then(res => {
+    return saveDeckTitleAsync(deck).then(res => {
       dispatch(addDeck(res));
     });
   };

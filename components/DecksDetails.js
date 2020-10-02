@@ -31,21 +31,22 @@ class DecksDetails extends Component {
       <SafeAreaView style={styles.container}>
         <ScrollView style={styles.scrollView}>
           {decks
-            ? Object.keys(decks).map(deckId => {
-                return;
-                <View deckId={decks[deckId].deckId}>
-                  <TouchableOpacity onPress={() => this.handleDeckId(deckId)}>
+            ? Object.values(decks).map(deck => {
+                return (
+                  <TouchableOpacity
+                    key={deck.title}
+                    onPress={() => this.handleDeckId(deck.title)}
+                  >
                     <DecksView
-                      deckId={decks[deckId].deckId}
-                      deck={decks[deckId]}
+                      deckId={deck.title}
+                      title={deck.title}
+                      totalCard={deck.questions.length}
                     />
 
-                    <Text style={styles.Text}>{decks[deckId].deckId}</Text>
-                    <Text style={styles.Text}>
-                      {decks[deckId].questions.length}
-                    </Text>
+                    <Text style={styles.Text}>{deck.title}</Text>
+                    <Text style={styles.Text}>{deck.questions.length}</Text>
                   </TouchableOpacity>
-                </View>;
+                );
               })
             : null}
         </ScrollView>

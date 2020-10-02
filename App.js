@@ -61,7 +61,7 @@ const TabNavigator = () => (
     />
     <Tab.Screen
       name="AddNewDeck"
-      component={AddNewCard}
+      component={AddNewDeck}
       options={{
         tabBarIcon: ({ size }) => (
           <MaterialCommunityIcons
