@@ -37,7 +37,7 @@ class AddNewDeck extends Component {
     if (lenTitle > 0) {
       if (deckTitle === undefined) {
         this.props.handleAddDeck(title);
-        saveDeckTitleAsync(title);
+        this.props.saveDeckTitleAsync(title);
         Alert.alert(`${title} created!`);
         this.props.navigation.navigate("Decks", { itemId: this.state.title });
       }
@@ -92,6 +92,9 @@ function mapDispatchToProps(dispatch) {
   return {
     handleAddDeck: title => {
       dispatch(handleAddDeck(title));
+    },
+    saveDeckTitleAsync: title => {
+      dispatch(saveDeckTitleAsync(title));
     }
   };
 }
