@@ -31,15 +31,19 @@ class AddNewDeck extends Component {
   handleDeckTitleSubmit = () => {
     // e.preventDefault();
     const { title } = this.state;
-    const { decks, deckTitle } = this.props;
+    //const { decks, deckTitle } = this.props;
     const lenTitle = title.length;
     // title exist
     if (lenTitle > 0) {
-      if (deckTitle === undefined) {
+      if (title === undefined) {
         this.props.handleAddDeck(title);
-        this.props.saveDeckTitleAsync(title);
+        saveDeckTitleAsync(title);
+        //this.props.handleAddDeck(title);
         Alert.alert(`${title} created!`);
-        this.props.navigation.navigate("Decks", { itemId: this.state.title });
+        //this.props.navigation.navigate("Decks", { itemId: this.state.title });
+        this.props.navigation.navigate("Decks", {
+          deckId: this.state.title
+        });
       }
     } else if (!title) {
       Alert.alert("Please enter deck title");
@@ -78,13 +82,13 @@ class AddNewDeck extends Component {
 const mapStateToProps = state => {
   // const { deckId } = props.route.params.id
   const { decks } = state;
-  const deckTitle = decks
-    ? Object.values(decks).map(deck => ({ deck: deck.title }))
-    : null;
+  //const deckTitle = decks
+  //? Object.values(decks).map(deck => ({ deck: deck.title }))
+  //: null;
 
   return {
-    decks,
-    deckTitle
+    decks
+    //deckTitle
   };
 };
 
@@ -92,10 +96,10 @@ function mapDispatchToProps(dispatch) {
   return {
     handleAddDeck: title => {
       dispatch(handleAddDeck(title));
-    },
-    saveDeckTitleAsync: title => {
-      dispatch(saveDeckTitleAsync(title));
     }
+    /* saveDeckTitleAsync: title => {
+      dispatch(saveDeckTitleAsync(title));
+    } */
   };
 }
 
@@ -103,7 +107,10 @@ export default connect(mapStateToProps, mapDispatchToProps)(AddNewDeck);
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 23
+    flex: 1,
+    paddingTop: 120,
+    justifyContent: "center",
+    alignItems: "center"
   },
   input: {
     margin: 15,

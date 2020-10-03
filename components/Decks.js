@@ -15,7 +15,7 @@ class Decks extends Component {
 
   handleNewCard = () => {
     this.props.navigation.navigate("AddNewCard", {
-      itemId: this.props.route.params.itemId
+      itemId: this.props.route.params.deckId
     });
   };
 
@@ -23,21 +23,22 @@ class Decks extends Component {
     //const { deckId } = this.props.routes.params.id;
 
     this.props.navigation.navigate("Quiz", {
-      itemId: this.props.route.params.itemId
+      itemId: this.props.route.params.deckId
     });
   };
 
   handleDeleteDeck = () => {
     this.props.navigation.navigate("DeleteDeck", {
-      itemId: this.props.route.params.itemId
+      itemId: this.props.route.params.deckId
     });
   };
 
   render() {
-    const { title, navigation, totalNoOfCards, decks, deck } = this.props;
+    const { title, navigation, totalNoOfCards, decks, deckId } = this.props;
+
     return (
       <View>
-        <Text> {title}</Text>
+        <Text> {deckId}</Text>
         <Text>Total {totalNoOfCards} Cards.</Text>
         <Button title="New Card" onPress={this.handleNewCard} />
         <Button title="Quiz" onPress={this.handleQuiz} />
@@ -47,8 +48,8 @@ class Decks extends Component {
   }
 }
 
-/*const mapStateToProps = (state, { route }) => {
-  const { deckId } = route.params.id;
+const mapStateToProps = (state, { props }) => {
+  const { deckId } = props.route.params.deckId;
   const { decks } = state;
 
   //const deck = decks[deckId];
@@ -62,7 +63,7 @@ class Decks extends Component {
     decks,
     deckId
   };
-}; */
+};
 
 export default connect()(Decks);
 
