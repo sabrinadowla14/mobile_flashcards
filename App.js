@@ -9,25 +9,26 @@ import Decks from "./components/Decks";
 import DecksDetails from "./components/DecksDetails";
 import AddNewCard from "./components/AddNewCard";
 import AddNewDeck from "./components/AddNewDeck";
+import DeleteDeck from "./components/DeleteDeck";
+import DecksView from "./components/DecksView";
 import Quiz from "./components/Quiz";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
 import reducer from "./reducers/index";
+//import rootReducer from "./reducers/index";
+import middleware from "./middleware/index";
 
 import {
   MarialCommunityIcons,
   MaterialCommunityIcons
 } from "@expo/vector-icons";
 
-import middleware from "./middleware";
 import color from "./utils/colors";
 
 import { createStore, applyMiddleware } from "redux";
 import { setLocalNotification } from "./utils/helpers";
 import thunk from "redux-thunk";
 import { enableScreens } from "react-native-screens";
-import DeleteDeck from "./components/DeleteDeck";
-import DecksView from "./components/DecksView";
 
 enableScreens();
 

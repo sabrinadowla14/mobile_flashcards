@@ -1,6 +1,6 @@
 import {
   getDecksAsync,
-  saveDeckTitle,
+  saveDeckTitleAsync,
   getDeckAsync,
   addCardToDeck,
   removeDeckAsync

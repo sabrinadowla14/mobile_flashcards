@@ -18,14 +18,14 @@ class DecksDetails extends Component {
   componentDidMount() {
     this.props.handleInitialData();
   }
-  handleDeckId = deckId => {
-    this.props.navigation.navigate("Decks", { deckId });
+  handleDeckId = title => {
+    this.props.navigation.navigate("Decks", { title });
   };
 
   //handleDeckOnPress = (deckId) => this.props.navigation.navigate("Decks", {deckId});
 
   render() {
-    const { decks } = this.props;
+    const { decks, navigation } = this.props;
     // const { deckId } = this.props.route.params.deckId;
     return (
       <SafeAreaView style={styles.container}>
@@ -40,7 +40,7 @@ class DecksDetails extends Component {
                     <DecksView
                       deckId={deck.title}
                       title={deck.title}
-                      totalCard={deck.questions.length}
+                      totalCardLen={deck.questions.length}
                     />
 
                     <Text style={styles.Text}>{deck.title}</Text>
@@ -55,7 +55,7 @@ class DecksDetails extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = state => {
   //const { deckId } = props.route.params.deckId;
   const { decks } = state;
   //const { deckId } = this.props.route.params.deckId;

@@ -1,12 +1,5 @@
 import React, { Component } from "react";
-import {
-  Button,
-  View,
-  StyleSheet,
-  Text,
-  SafeAreaView,
-  ScrollView
-} from "react-native";
+import { StyleSheet, View, Text, Button } from "react-native";
 import { connect } from "react-redux";
 import { white } from "../utils/colors";
 
@@ -15,7 +8,8 @@ class Decks extends Component {
 
   handleNewCard = () => {
     this.props.navigation.navigate("AddNewCard", {
-      itemId: this.props.route.params.deckId
+      deckId: this.props.route.params
+      // decks: this.props.decks
     });
   };
 
@@ -23,22 +17,21 @@ class Decks extends Component {
     //const { deckId } = this.props.routes.params.id;
 
     this.props.navigation.navigate("Quiz", {
-      itemId: this.props.route.params.deckId
+      /*deckId: this.props.deckId */
     });
   };
 
   handleDeleteDeck = () => {
     this.props.navigation.navigate("DeleteDeck", {
-      itemId: this.props.route.params.deckId
+      // deckId: this.props.deckId
     });
   };
 
   render() {
-    const { title, navigation, totalNoOfCards, decks, deckId } = this.props;
-
+    const { title, navigation, totalNoOfCards, decks, deck } = this.props;
     return (
       <View>
-        <Text> {deckId}</Text>
+        <Text> {title}</Text>
         <Text>Total {totalNoOfCards} Cards.</Text>
         <Button title="New Card" onPress={this.handleNewCard} />
         <Button title="Quiz" onPress={this.handleQuiz} />
@@ -48,8 +41,8 @@ class Decks extends Component {
   }
 }
 
-const mapStateToProps = (state, { props }) => {
-  const { deckId } = props.route.params.deckId;
+/*const mapStateToProps = (state, { route }) => {
+  const { deckId } = route.params.id;
   const { decks } = state;
 
   //const deck = decks[deckId];
@@ -63,7 +56,7 @@ const mapStateToProps = (state, { props }) => {
     decks,
     deckId
   };
-};
+}; */
 
 export default connect()(Decks);
 

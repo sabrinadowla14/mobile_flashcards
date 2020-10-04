@@ -13,18 +13,15 @@ class DecksView extends Component {
   /* handleTouch = id => {
     navigation.navigate("DeckDetail", { id });
   };*/
-  handlebtnPressed = e => {
-    const deckId = this.props.deckId;
-    //const deck = this.props.deck;
-    const totalCardLen = this.props.totalCardLen;
-    this.props.navigation.navigate("Decks", { deckId, totalCardLen });
+  buttonPressed = e => {
+    this.props.navigation.navigate("Decks", { deckId });
   };
   render() {
-    const { deck } = this.props;
-    const { deckId, title, totalCardLen } = this.props;
+    const { cards } = this.props;
+    const { deckId } = this.props.route.params;
     return (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.button} onPress={this.handlebtnPressed}>
+        <TouchableOpacity style={styles.button} onPress={this.buttonPressed}>
           <Text
             style={{
               color: "lightslategrey",
@@ -35,9 +32,7 @@ class DecksView extends Component {
           >
             {deckId}
           </Text>
-          <Text style={{ color: "lightslategrey", fontSize: 15 }}>
-            {totalCardLen}
-          </Text>
+          <Text style={{ color: "lightslategrey", fontSize: 15 }}></Text>
         </TouchableOpacity>
       </View>
     );
@@ -80,21 +75,18 @@ const styles = StyleSheet.create({
 });
 
 function mapStateToProps({ state, props }) {
-  //const { deckId } = props.route.params.deckId;
+  const { deckId } = props.route.params.deckId;
   const { decks } = state;
-
-  const { deckId } = this.props;
-  const deck = decks[deckId];
+  const { cards } = decks[deck.deckId];
 
   return {
-    decks,
+    //decks: state,
     deck,
-    //deckId,
-    //cards: cards,
-    // deck: decks[deckId],
-    // title: deck.title,
-    deckId
+    deckId,
+    cards: cards,
+    deck: decks[deckId],
+    title: deck.title
   };
 }
 
-export default connect(mapStateToProps)(DecksView);
+export default connect()(DecksView);
