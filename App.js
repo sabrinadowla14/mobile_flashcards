@@ -2,6 +2,8 @@ import { StatusBar } from "expo-status-bar";
 import "react-native-gesture-handler";
 //import SafeAreaView from "react-native-safe-area-view";
 import React from "react";
+import { connect } from "react-redux";
+import store from "./store";
 import { StyleSheet, Text, View } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -17,6 +19,9 @@ import { Provider } from "react-redux";
 import reducer from "./reducers/index";
 //import rootReducer from "./reducers/index";
 import middleware from "./middleware/index";
+import { clearLocalNotification, setLocalNotification } from "./utils/helpers";
+import { Icon } from "react-native-elements";
+import { handleInitialData } from "./actions";
 
 import {
   MarialCommunityIcons,
@@ -25,8 +30,8 @@ import {
 
 import color from "./utils/colors";
 
-import { createStore, applyMiddleware } from "redux";
-import { setLocalNotification } from "./utils/helpers";
+//import { createStore, applyMiddleware } from "redux";
+
 import thunk from "redux-thunk";
 import { enableScreens } from "react-native-screens";
 
@@ -34,10 +39,10 @@ enableScreens();
 
 /* create Redux Store */
 //const store = createStore(reducer, middleware);
-const rootReducer = (state = {}, action) => {
+/*const rootReducer = (state = {}, action) => {
   return state;
-};
-const store = createStore(rootReducer, applyMiddleware(thunk));
+}; */
+//const store = createStore(rootReducer, applyMiddleware(thunk));
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -94,9 +99,10 @@ const StackNavigator = () => (
   </Stack.Navigator>
 );
 
-export default class App extends React.Component {
+class App extends React.Component {
   componentDidMount() {
     setLocalNotification();
+    store.dispatch(handleInitialData());
   }
 
   render() {
@@ -120,3 +126,5 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   }
 });
+
+export default App;

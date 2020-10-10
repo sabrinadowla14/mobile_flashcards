@@ -15,11 +15,11 @@ import DecksView from "./DecksView";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 class DecksDetails extends Component {
-  componentDidMount() {
+  /*componentDidMount() {
     this.props.handleInitialData();
-  }
+  }*/
   handleDeckId = title => {
-    this.props.navigation.navigate("Decks", { title });
+    this.props.navigation.navigate("Decks", { deckTitle });
   };
 
   //handleDeckOnPress = (deckId) => this.props.navigation.navigate("Decks", {deckId});
@@ -31,21 +31,19 @@ class DecksDetails extends Component {
       <SafeAreaView style={styles.container}>
         <ScrollView style={styles.scrollView}>
           {decks
-            ? Object.values(decks).map(deck => {
+            ? Object.keys(decks).map(key => {
                 return (
-                  <TouchableOpacity
-                    key={deck.title}
-                    onPress={() => this.handleDeckId(deck.title)}
-                  >
-                    <DecksView
-                      deckId={deck.title}
-                      title={deck.title}
-                      totalCardLen={deck.questions.length}
-                    />
-
-                    <Text style={styles.Text}>{deck.title}</Text>
-                    <Text style={styles.Text}>{deck.questions.length}</Text>
-                  </TouchableOpacity>
+                  <View key={decks[key].title}>
+                    <TouchableOpacity
+                      onPress={() => this.handleDeckId(decks[key].title)}
+                    >
+                      <DecksView
+                        deckId={decks[key].title}
+                        title={decks[key].title}
+                        totalCardLen={decks[key].questions.length}
+                      />
+                    </TouchableOpacity>
+                  </View>
                 );
               })
             : null}

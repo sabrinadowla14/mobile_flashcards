@@ -25,6 +25,13 @@
 - yarn add -D expo-module-scripts
 - npm install --save @expo/vector-icons
 - expo install @react-navigation/native
+- expo install expo-permissions
+- expo install expo-constants
+- expo install expo-splash-screen
+- expo install expo-updates
+- npm install expo-updates
+- npx pod-install
+- yarn add react-native-elements
 
 ## Redux
 

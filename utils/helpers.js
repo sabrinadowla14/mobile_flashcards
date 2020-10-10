@@ -1,7 +1,6 @@
-// utils/helpers.js
 import React from "react";
 import { View, StyleSheet, AsyncStorage } from "react-native";
-
+import Constants from "expo-constants";
 import {
   FontAwesome,
   MaterialIcons,
@@ -21,7 +20,7 @@ export function generateUID() {
   );
 }
 
-const NOTIFICATION_KEY = "UdaciFitness:notifications";
+const NOTIFICATION_KEY = "Flashcards:Notifications";
 
 export function getDailyReminderValue() {
   return {

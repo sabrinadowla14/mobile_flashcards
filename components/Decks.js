@@ -7,8 +7,9 @@ class Decks extends Component {
   state = {};
 
   handleNewCard = () => {
+    const { deckTitle } = this.props.route.params;
     this.props.navigation.navigate("AddNewCard", {
-      deckId: this.props.route.params
+      deckId: deckTitle
       // decks: this.props.decks
     });
   };

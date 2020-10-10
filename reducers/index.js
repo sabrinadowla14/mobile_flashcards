@@ -2,10 +2,14 @@ import {
   RECEIVE_DECKS,
   ADD_DECK,
   ADD_CARD,
-  REMOVE_DECK
+  REMOVE_DECK,
+  RESET_DATA
 } from "../actions/index";
 
-export default function questions(state = {}, action) {
+import { startingDecks } from "../utils/_DATA";
+const initialState = startingDecks;
+
+function decks(state = initialState, action) {
   switch (action.type) {
     case RECEIVE_DECKS:
       return {
@@ -24,15 +28,6 @@ export default function questions(state = {}, action) {
         }
       };
 
-    /*case ADD_CARD:
-      const { deckId, card } = action;
-      return {
-        ...state,
-        [deckId]: {
-          ...state[deckId],
-          questions: [...state[deckId].questions].concat(card)
-        }
-      };*/
     case ADD_CARD:
       const { deckId, card } = action;
       return {
@@ -49,7 +44,12 @@ export default function questions(state = {}, action) {
         ...restOfState
       };
 
+    case RESET_DATA:
+      return startingDecks;
+
     default:
       return state;
   }
 }
+
+export default decks;
