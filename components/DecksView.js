@@ -18,7 +18,7 @@ class DecksView extends Component {
   };
   render() {
     const { cards } = this.props;
-    const { deckId } = this.props.route.params;
+    const { itemId } = this.props.route.params;
     return (
       <View style={styles.container}>
         <TouchableOpacity style={styles.button} onPress={this.buttonPressed}>
@@ -30,7 +30,7 @@ class DecksView extends Component {
               paddingBottom: 20
             }}
           >
-            {deckId}
+            {itemId}
           </Text>
           <Text style={{ color: "lightslategrey", fontSize: 15 }}></Text>
         </TouchableOpacity>
