@@ -18,7 +18,7 @@ class DecksView extends Component {
   };
   render() {
     const { cards } = this.props;
-    const { itemId } = this.props.route.params;
+    const { itemId } = this.props;
     return (
       <View style={styles.container}>
         <TouchableOpacity style={styles.button} onPress={this.buttonPressed}>

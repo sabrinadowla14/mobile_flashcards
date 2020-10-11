@@ -44,7 +44,7 @@ class AddNewDeck extends Component {
         this.props.navigation.navigate("Decks", {
           itemId: this.state.title
         });
-        this.props.navigation.navigate("DecksView", {
+        this.props.navigation.navigate("Decks", {
           itemId: this.state.title
         });
       }

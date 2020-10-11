@@ -13,6 +13,7 @@ import AddNewCard from "./components/AddNewCard";
 import AddNewDeck from "./components/AddNewDeck";
 import DeleteDeck from "./components/DeleteDeck";
 import DecksView from "./components/DecksView";
+
 import Quiz from "./components/Quiz";
 import { NavigationContainer } from "@react-navigation/native";
 import { Provider } from "react-redux";
