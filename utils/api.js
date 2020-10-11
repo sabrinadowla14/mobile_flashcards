@@ -1,4 +1,4 @@
-import { startingDecks } from "./_DATA";
+import { decks } from "./_DATA";
 import AsyncStorage from "@react-native-community/async-storage";
 import { generateID } from "./helpers";
 
@@ -76,12 +76,30 @@ export const addCardToDeck = async (title, card) => {
         }
       })
     );
-  } catch (e) {
+  } catch (err) {
     Alert.alert("Not able to save the card");
-    console.log(e);
+    console.log(err);
   }
 };
 
+/*export async function addCardToDeck(title, card) {
+  try {
+    //const deck = await getDeck(deckId);
+
+    await AsyncStorage.getItem(DECKS_KEY).then(results => {
+      const data = JSON.parse(results);
+      Object.keys(data).map(id => {
+        if (id === title) {
+          data[id].questions.push(card);
+        }
+      });
+      AsyncStorage.setItem(DECKS_KEY, JSON.stringify(data));
+    });
+  } catch (err) {
+    console.log(err);
+  }
+}
+*/
 // delete a deck
 export const removeDeckAsync = async id => {
   try {
@@ -101,7 +119,7 @@ export const removeDeckAsync = async id => {
 
 export const resetDecksAsync = async () => {
   try {
-    await AsyncStorage.setItem(DECKS_KEY, JSON.stringify(startingDecks));
+    await AsyncStorage.setItem(DECKS_KEY, JSON.stringify(decks));
   } catch (e) {
     Alert.alert("Not able to reset data");
   }

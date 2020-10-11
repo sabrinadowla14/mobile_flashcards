@@ -6,7 +6,8 @@ import {
   SafeAreaView,
   ScrollView,
   TextInput,
-  Button
+  Button,
+  Alert
 } from "react-native";
 import { connect } from "react-redux";
 import { addCard } from "../actions";
@@ -29,16 +30,19 @@ class AddNewCard extends Component {
       answer
     });
   };
-  handleCardSubmit = async () => {
+  handleCardSubmit = () => {
     // e.preventDefault();
-    const { deckTitle, navigation } = this.props;
+    const { itemId } = this.props.route.params.itemId;
+    //const { checkCard } = this.props;
     const { question, answer } = this.state;
     const { card } = cardFormat(question, answer);
     const { addCard } = this.props;
-    const { goBack } = this.props.navigation;
-    await addCardToDeck(deckTitle, card);
-    addCard(deckTitle, card);
-    goBack();
+    //const { goBack } = this.props.navigation;
+
+    addCard(itemId, card);
+    addCardToDeck(itemId, card);
+
+    this.props.navigation.navigate("Decks");
 
     //addCardToDeck(deck, card);
     this.setState({
@@ -49,10 +53,10 @@ class AddNewCard extends Component {
   };
   render() {
     const { question, answer } = this.state;
-    const { deckTitle } = this.props;
+    const { itemId } = this.props.route.params.itemId;
     return (
       <View style={styles.container}>
-        <Text> Add a New Card to {deckId} </Text>
+        <Text> Add a New Card to {itemId} </Text>
         <TextInput
           style={styles.input}
           placeholder="Questions Please"
@@ -66,7 +70,7 @@ class AddNewCard extends Component {
           onChangeText={this.handleInputAnswerChange}
         />
         <Button
-          disabled={questions === "" || answers === ""}
+          disabled={question === "" || answer === ""}
           title="ADD CARD"
           onPress={this.handleCardSubmit}
         />
@@ -75,13 +79,19 @@ class AddNewCard extends Component {
   }
 }
 
-function mapStateToProps(state, { route }) {
+function mapStateToProps(state) {
   const { decks } = state;
-  const { deckTitle } = route.params;
+  // const { itemId } = route.params;
+  //const checkCard = decks
+  //  ? Object.values(decks).map(deck => ({ card: deck.questions
+
+  // }))
+  //  : null;
 
   return {
-    decks,
-    deckTitle
+    decks
+    // itemId,
+    // checkCard
   };
 }
 
@@ -89,13 +99,13 @@ function mapDispatchToProps(dispatch) {
   const { question, answer } = this.state;
   const card = cardFormat(question, answer);
   return {
-    addCard: (deckId, card) => {
-      dispatch(addCard(deckId, card));
+    addCard: (itemId, card) => {
+      dispatch(addCard(itemId, card));
     }
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddNewCard);
+export default connect(mapStateToProps, { addCard })(AddNewCard);
 
 const styles = StyleSheet.create({
   container: {

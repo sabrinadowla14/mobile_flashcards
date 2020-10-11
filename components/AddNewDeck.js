@@ -11,7 +11,7 @@ import {
   Alert
 } from "react-native";
 import { connect } from "react-redux";
-import { addDeck } from "../actions";
+import { handleAddDeck } from "../actions";
 import { saveDeckTitleAsync } from "../utils/api";
 //import DecksDetails from "./DecksDetails";
 import { white, blue, red } from "../utils/colors";
@@ -35,10 +35,8 @@ class AddNewDeck extends Component {
     const lenTitle = title.length;
     // title exist
     if (lenTitle > 0) {
-      if (deckTitle === title) {
-        Alert.alert("We have this Deck!, Please choose a different one");
-      } else {
-        this.props.addDeck(title);
+      if (deckTitle !== undefined) {
+        this.props.handleAddDeck(title);
         saveDeckTitleAsync(title);
 
         Alert.alert(`${title} created!`);
@@ -47,7 +45,7 @@ class AddNewDeck extends Component {
           deckId: this.state.title
         });
       }
-    } else {
+    } else if (!title) {
       Alert.alert("Please enter deck title");
     }
 
@@ -94,7 +92,15 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { addDeck })(AddNewDeck);
+function mapDispatchToProps(dispatch) {
+  return {
+    handleAddDeck: title => {
+      dispatch(handleAddDeck(title));
+    }
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddNewDeck);
 
 const styles = StyleSheet.create({
   container: {

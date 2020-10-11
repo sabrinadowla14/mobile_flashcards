@@ -19,7 +19,9 @@ class DecksDetails extends Component {
     this.props.handleInitialData();
   }*/
   handleDeckId = title => {
-    this.props.navigation.navigate("Decks", { deckTitle });
+    this.props.navigation.navigate("Decks", {
+      itemId: deck.title
+    });
   };
 
   //handleDeckOnPress = (deckId) => this.props.navigation.navigate("Decks", {deckId});
@@ -28,25 +30,21 @@ class DecksDetails extends Component {
     const { decks, navigation } = this.props;
     // const { deckId } = this.props.route.params.deckId;
     return (
-      <SafeAreaView style={styles.container}>
-        <ScrollView style={styles.scrollView}>
-          {decks
-            ? Object.keys(decks).map(key => {
-                return (
-                  <View key={decks[key].title}>
-                    <TouchableOpacity
-                      onPress={() => this.handleDeckId(decks[key].title)}
-                    >
-                      <DecksView
-                        deckId={decks[key].title}
-                        title={decks[key].title}
-                        totalCardLen={decks[key].questions.length}
-                      />
-                    </TouchableOpacity>
-                  </View>
-                );
-              })
-            : null}
+      <SafeAreaView>
+        <ScrollView>
+          {Object.values(decks).map(deck => {
+            return (
+              <View style={styles.container} key={deck.title}>
+                <TouchableOpacity
+                  onPress={() => {
+                    this.handleDeckId;
+                  }}
+                >
+                  <Deck itemId={deck.title} />
+                </TouchableOpacity>
+              </View>
+            );
+          })}
         </ScrollView>
       </SafeAreaView>
     );
@@ -65,7 +63,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { handleInitialData })(DecksDetails);
+export default connect(mapStateToProps, {})(DecksDetails);
 
 const styles = StyleSheet.create({
   container: {

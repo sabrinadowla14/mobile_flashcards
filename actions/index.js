@@ -97,9 +97,9 @@ export function getAllDecks() {
   };
 } */
 
-export function handleAddDeck(deck) {
+export function handleAddDeck(title) {
   return dispatch => {
-    return saveDeckTitleAsync(deck).then(res => {
+    return saveDeckTitleAsync(title).then(res => {
       dispatch(addDeck(res));
     });
   };

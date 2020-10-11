@@ -7,9 +7,8 @@ import {
 } from "../actions/index";
 
 import { startingDecks } from "../utils/_DATA";
-const initialState = startingDecks;
 
-function decks(state = initialState, action) {
+function decks(state = {}, action) {
   switch (action.type) {
     case RECEIVE_DECKS:
       return {
