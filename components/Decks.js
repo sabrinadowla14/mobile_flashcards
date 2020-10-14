@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { StyleSheet, View, Text, Button } from "react-native";
 import { connect } from "react-redux";
 import { white } from "../utils/colors";
+import { removeDeck } from "../actions/index";
+import { removeDeckAsync } from "../utils/api";
+//import { decksView } from "./DecksView";
 
 class Decks extends Component {
   state = {};
@@ -16,26 +19,33 @@ class Decks extends Component {
   handleQuiz = () => {
     //const { deckId } = this.props.routes.params.id;
 
+    const { itemId, numberOfCards } = this.props.route.params;
+
     this.props.navigation.navigate("Quiz", {
-      itemId: this.props
+      itemId: JSON.parse(JSON.stringify(itemId)),
+      numberOfCards:
+        this.props.decks[itemId] !== undefined
+          ? this.props.decks[itemId].questions.length
+          : null
     });
   };
 
   handleDeleteDeck = () => {
-    this.props.navigation.navigate("DeleteDeck", {
-      itemId: this.props
-    });
+    const { removeDeck, navigation, decks } = this.props;
+    const { itemId } = this.props.route.params;
+    const deck = decks[itemId];
+    const id = deck.title;
+    removeDeck(id);
+    removeDeckAsync(id);
+    navigation.goBack();
   };
 
   render() {
-    const { itemId } = this.props;
-    // const cardId = JSON.parse(JSON.stringify(itemId).itemId);
-
     const { title, navigation, totalNoOfCards, decks, deck } = this.props;
     return (
       <View>
-        <Text> {itemId}</Text>
-
+        <Text> {title}</Text>
+        <Text>Total {totalNoOfCards} Cards.</Text>
         <Button title="New Card" onPress={this.handleNewCard} />
         <Button title="Quiz" onPress={this.handleQuiz} />
         <Button title="Delete Deck" onPress={this.handleDeleteDeck} />
@@ -44,24 +54,14 @@ class Decks extends Component {
   }
 }
 
-const mapStateToProps = (state, { route }) => {
-  const { itemId } = route.params;
-  const { decks } = state;
-
-  //const deck = decks[deckId];
-  const decksInfo = Object.values(decks || {});
-  const deck = Object.keys(decksInfo).map((key, i) => {
-    decksInfo[key];
-  });
-
+const mapStateToProps = state => {
+  const decks = state;
   return {
-    decksInfo: decksInfo !== undefined ? decksInfo : null,
-    decks,
-    itemId
+    decks
   };
 };
-
-export default connect()(Decks);
+// uncomment the mapStateToProps later
+export default connect(mapStateToProps, { removeDeck })(Decks);
 
 const styles = StyleSheet.create({
   container: {

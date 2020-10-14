@@ -35,7 +35,7 @@ class AddNewDeck extends Component {
     const lenTitle = title.length;
     // title exist
     if (lenTitle > 0) {
-      if (deckTitle !== title) {
+      if (deckTitle === undefined) {
         this.props.addDeck(title);
         saveDeckTitleAsync(title);
 
@@ -44,17 +44,15 @@ class AddNewDeck extends Component {
         this.props.navigation.navigate("Decks", {
           itemId: this.state.title
         });
-        this.props.navigation.navigate("Decks", {
-          itemId: this.state.title
+        this.setState({
+          title: ""
         });
+      } else {
+        Alert.alert("We have this deck");
       }
-    } else if (!title) {
-      Alert.alert("Please enter deck title");
+    } else {
+      Alert.alert("We don't have this deck");
     }
-
-    this.setState({
-      title: ""
-    });
   };
 
   render() {
@@ -82,11 +80,12 @@ class AddNewDeck extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, { route }) => {
   // const { deckId } = props.route.params.id
   const { decks } = state;
+  const { title } = route.params.title;
   const deckTitle = decks
-    ? Object.values(decks).map(deck => ({ deck: deck.title }))
+    ? Object.values(decks).find(deck => deck === this.state.title)
     : null;
 
   return {
@@ -103,7 +102,7 @@ const mapStateToProps = state => {
   };
 }*/
 
-export default connect(mapStateToProps, { addDeck })(AddNewDeck);
+export default connect(null, { addDeck })(AddNewDeck);
 
 const styles = StyleSheet.create({
   container: {

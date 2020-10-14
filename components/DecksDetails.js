@@ -13,38 +13,42 @@ import { white } from "../utils/colors";
 import { handleInitialData } from "../actions";
 import DecksView from "./DecksView";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { getDecksAsync } from "../utils/api";
+import { receiveDecks } from "../actions";
 
 class DecksDetails extends Component {
-  /*componentDidMount() {
-    this.props.handleInitialData();
-  }*/
-  handleDeckId = title => {
+  componentDidMount() {
+    const { dispatch } = this.props;
+
+    getDecksAsync().then(decks => dispatch(receiveDecks(decks)));
+  }
+  /*handleDeckId = title => {
     this.props.navigation.navigate("Decks", {
       itemId: deck.title
     });
   };
-
+*/
   //handleDeckOnPress = (deckId) => this.props.navigation.navigate("Decks", {deckId});
 
   render() {
     const { decks, navigation } = this.props;
     // const { deckId } = this.props.route.params.deckId;
     return (
-      <SafeAreaView>
+      <SafeAreaView style={styles.container}>
         <ScrollView>
-          {Object.values(decks).map(deck => {
-            return (
-              <View style={styles.container} key={deck.title}>
-                <TouchableOpacity
-                  onPress={() => {
-                    this.handleDeckId;
-                  }}
-                >
-                  <Deck itemId={deck.title} />
-                </TouchableOpacity>
-              </View>
-            );
-          })}
+          {Object.values(decks) !== undefined ? (
+            Object.values(decks).map(deck => (
+              <DecksView
+                key={deck.title}
+                //title={deck.title}
+                navigation={this.props.navigation}
+                id={deck.title}
+                cardCount={deck.questions.length}
+              />
+            ))
+          ) : (
+            <Text>We don't have any decks</Text>
+          )}
         </ScrollView>
       </SafeAreaView>
     );

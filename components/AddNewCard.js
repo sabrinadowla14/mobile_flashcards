@@ -32,17 +32,17 @@ class AddNewCard extends Component {
   };
   handleCardSubmit = () => {
     // e.preventDefault();
-    const { itemId } = this.props.route.params.itemId;
+    const { title } = this.props.route;
     //const { checkCard } = this.props;
     const { question, answer } = this.state;
     const { card } = cardFormat(question, answer);
     const { addCard } = this.props;
     //const { goBack } = this.props.navigation;
 
-    addCard(itemId, card);
-    addCardToDeck(itemId, card);
+    addCard(title, card);
+    addCardToDeck(title, card);
 
-    this.props.navigation.navigate("Decks");
+    this.props.navigation.navigate("Decks", { itemId: title });
 
     //addCardToDeck(deck, card);
     this.setState({
@@ -53,7 +53,7 @@ class AddNewCard extends Component {
   };
   render() {
     const { question, answer } = this.state;
-    const { itemId } = this.props.route.params.itemId;
+    const { itemId } = this.props;
     return (
       <View style={styles.container}>
         <Text> Add a New Card to {itemId} </Text>
@@ -81,7 +81,7 @@ class AddNewCard extends Component {
 
 function mapStateToProps(state) {
   const { decks } = state;
-  // const { itemId } = route.params;
+  const { title } = route.params;
   //const checkCard = decks
   //  ? Object.values(decks).map(deck => ({ card: deck.questions
 
@@ -89,8 +89,8 @@ function mapStateToProps(state) {
   //  : null;
 
   return {
-    decks
-    // itemId,
+    decks,
+    itemId
     // checkCard
   };
 }

@@ -1,4 +1,4 @@
-import { decks } from "./_DATA";
+import { startingDecks } from "./_DATA";
 import AsyncStorage from "@react-native-community/async-storage";
 import { generateID } from "./helpers";
 
@@ -9,30 +9,29 @@ export async function removeAllDecks() {
 }
 
 // get all decks
-/*export const getDecksAsync = async () => {
+export const getDecksAsync = async () => {
   try {
-    const decksStorage = await AsyncStorage.getItem(DECKS_KEY);
-
-    return decksStorage !== null
-      ? JSON.parse(decksStorage)
+    const decksData = await AsyncStorage.getItem(DECKS_KEY);
+    console.log("decksData", decksData);
+    return decksData !== null
+      ? JSON.parse(decksData)
       : AsyncStorage.setItem(DECKS_KEY, JSON.stringify(startingDecks));
-  } catch (e) {
-    Alert.alert("Error while fetching decks data");
-    console.log(e);
+  } catch (err) {
+    console.log(err);
   }
-}; */
+};
 
-export async function getDecksAsync() {
+/*export async function getDecksAsync() {
   try {
     const decksStorage = await AsyncStorage.getItem(DECKS_KEY);
     if (decksStorage === null) {
-      AsyncStorage.setItem(DECKS_KEY, JSON.stringify(decks));
+      AsyncStorage.setItem(DECKS_KEY, JSON.stringify(startingDecks));
     }
     return decksStorage === null ? decks : JSON.parse(decksStorage);
   } catch (e) {
     console.log(e);
   }
-}
+}*/
 
 // get one deck
 export const getDeckAsync = async id => {
@@ -40,7 +39,6 @@ export const getDeckAsync = async id => {
     const deckData = await AsyncStorage.getItem(DECKS_KEY);
     return deckData !== null ? JSON.parse(deckData)[id] : null;
   } catch (e) {
-    Alert.alert("Did not find the single deck!");
     console.log(e);
   }
 };
@@ -58,7 +56,6 @@ export const saveDeckTitleAsync = async title => {
       })
     );
   } catch (e) {
-    Alert.alert("Not able to save a deck");
     console.log(e);
   }
 };
@@ -77,7 +74,6 @@ export const addCardToDeck = async (title, card) => {
       })
     );
   } catch (err) {
-    Alert.alert("Not able to save the card");
     console.log(err);
   }
 };
@@ -108,19 +104,14 @@ export const removeDeckAsync = async id => {
 
     decks[id] = undefined;
     delete decks[id];
-
-    await AsyncStorage.setItem(DECKS_KEY, JSON.stringify(decks)).then(() =>
-      Alert.alert("Deck deleted")
-    );
+    await AsyncStorage.setItem(DECKS_KEY, JSON.stringify(decks));
   } catch (e) {
-    Alert.alert("Not able to delete the deck ");
+    console.log(e);
   }
 };
 
 export const resetDecksAsync = async () => {
   try {
-    await AsyncStorage.setItem(DECKS_KEY, JSON.stringify(decks));
-  } catch (e) {
-    Alert.alert("Not able to reset data");
-  }
+    await AsyncStorage.setItem(DECKS_KEY, JSON.stringify(startingDecks));
+  } catch (e) {}
 };

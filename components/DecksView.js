@@ -10,18 +10,20 @@ import { connect } from "react-redux";
 import { white, gray, black } from "../utils/colors";
 
 class DecksView extends Component {
-  /* handleTouch = id => {
-    navigation.navigate("DeckDetail", { id });
-  };*/
-  buttonPressed = e => {
-    this.props.navigation.navigate("Decks");
+  handleDeck = e => {
+    this.props.navigation.navigate("Decks", {
+      itemId: this.props.id,
+      cardCount: this.props.cardCount
+    });
   };
+
   render() {
-    const { cards } = this.props;
-    const { itemId } = this.props;
+    const { id, cardCount, title } = this.props;
+
+    //const title = this.props.route.params;
     return (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.button} onPress={this.buttonPressed}>
+        <TouchableOpacity style={styles.button} onPress={this.handleDeck}>
           <Text
             style={{
               color: "lightslategrey",
@@ -30,9 +32,11 @@ class DecksView extends Component {
               paddingBottom: 20
             }}
           >
-            {itemId}
+            {title}
           </Text>
-          <Text style={{ color: "lightslategrey", fontSize: 15 }}></Text>
+          <Text style={{ color: "lightslategrey", fontSize: 15 }}>
+            {cardCount} cards.
+          </Text>
         </TouchableOpacity>
       </View>
     );
@@ -74,19 +78,19 @@ const styles = StyleSheet.create({
   }
 });
 
-function mapStateToProps({ state, props }) {
-  const { deckId } = props.route.params.deckId;
+/*function mapStateToProps(state, { id }) {
+  //const { deckId } = props.route.params.deckId;
   const { decks } = state;
-  const { cards } = decks[deck.deckId];
+  const { deck } = decks[id];
+  const title = deck.title;
+  const cardCount = deck.questions.length;
 
   return {
     //decks: state,
-    deck,
-    deckId,
-    cards: cards,
-    deck: decks[deckId],
-    title: deck.title
-  };
-}
 
-export default connect()(DecksView);
+    cardCount,
+    id
+  };
+} */
+
+export default DecksView;
