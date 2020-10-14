@@ -1,3 +1,9 @@
+## How to Run
+
+- expo install
+- expo start or yarn start
+-
+
 ## Development Environment
 
 - node v12.14.1
