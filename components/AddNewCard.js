@@ -53,10 +53,10 @@ class AddNewCard extends Component {
   };
   render() {
     const { question, answer } = this.state;
-    const { itemId } = this.props;
+    const { title } = this.props;
     return (
       <View style={styles.container}>
-        <Text> Add a New Card to {itemId} </Text>
+        <Text> Add a New Card to {title} </Text>
         <TextInput
           style={styles.input}
           placeholder="Questions Please"
@@ -79,7 +79,7 @@ class AddNewCard extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state, { route }) {
   const { decks } = state;
   const { title } = route.params;
   //const checkCard = decks
@@ -90,7 +90,7 @@ function mapStateToProps(state) {
 
   return {
     decks,
-    itemId
+    title
     // checkCard
   };
 }
@@ -99,8 +99,8 @@ function mapDispatchToProps(dispatch) {
   const { question, answer } = this.state;
   const card = cardFormat(question, answer);
   return {
-    addCard: (itemId, card) => {
-      dispatch(addCard(itemId, card));
+    addCard: (title, card) => {
+      dispatch(addCard(title, card));
     }
   };
 }

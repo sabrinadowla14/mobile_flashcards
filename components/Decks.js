@@ -11,7 +11,7 @@ class Decks extends Component {
 
   handleNewCard = () => {
     this.props.navigation.navigate("AddNewCard", {
-      itemId: this.props
+      title: this.props.route.itemId
       // decks: this.props.decks
     });
   };
@@ -23,10 +23,9 @@ class Decks extends Component {
 
     this.props.navigation.navigate("Quiz", {
       itemId: JSON.parse(JSON.stringify(itemId)),
-      numberOfCards:
-        this.props.decks[itemId] !== undefined
-          ? this.props.decks[itemId].questions.length
-          : null
+      numberOfCards: this.props.decks[itemId]
+        ? this.props.decks[itemId].questions.length
+        : null
     });
   };
 

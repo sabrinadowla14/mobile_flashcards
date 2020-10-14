@@ -134,7 +134,8 @@ class Quiz extends React.Component {
             <View style={styles.card}>
               <Text style={styles.title}>Answer</Text>
               <Text>
-                {decks[itemId].questions[this.state.index] !== undefined &&
+                {decks[itemId] &&
+                  decks[itemId].questions[this.state.index] &&
                   decks[itemId].questions[this.state.index].answer}
               </Text>
             </View>
@@ -143,7 +144,8 @@ class Quiz extends React.Component {
               <Text style={styles.title}>Question</Text>
 
               <Text>
-                {decks[itemId].questions[this.state.index] !== undefined &&
+                {decks[itemId] &&
+                  decks[itemId].questions[this.state.index] &&
                   decks[itemId].questions[this.state.index].question}
               </Text>
             </View>
