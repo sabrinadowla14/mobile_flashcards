@@ -19,11 +19,11 @@ class Decks extends Component {
   handleQuiz = () => {
     //const { deckId } = this.props.routes.params.id;
 
-    const { itemId, numberOfCards } = this.props.route.params;
+    const { itemId, cardCount } = this.props.route.params;
 
     this.props.navigation.navigate("Quiz", {
       itemId: JSON.parse(JSON.stringify(itemId)),
-      numberOfCards: this.props.decks[itemId]
+      cardCount: this.props.decks[itemId]
         ? this.props.decks[itemId].questions.length
         : null
     });
@@ -40,11 +40,18 @@ class Decks extends Component {
   };
 
   render() {
-    const { title, navigation, totalNoOfCards, decks, deck } = this.props;
+    const { navigation, decks } = this.props;
+    // const { itemId } = this.props.route.params;
+    const { itemId } = this.props.route;
+    const cardTitle = JSON.parse(JSON.stringify(itemId));
+    const cardCount = decks[itemId] && decks[itemId].questions.length;
+
+    //const cardCount = decks[itemId] ? decks[itemId].questions.length : null;
+
     return (
       <View>
-        <Text> {title}</Text>
-        <Text>Total {totalNoOfCards} Cards.</Text>
+        <Text> Title of Deck is: {cardTitle}</Text>
+        <Text>Total {cardCount} Cards.</Text>
         <Button title="New Card" onPress={this.handleNewCard} />
         <Button title="Quiz" onPress={this.handleQuiz} />
         <Button title="Delete Deck" onPress={this.handleDeleteDeck} />
