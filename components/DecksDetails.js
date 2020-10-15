@@ -18,9 +18,7 @@ import { receiveDecks } from "../actions";
 
 class DecksDetails extends Component {
   componentDidMount() {
-    const { dispatch } = this.props;
-
-    getDecksAsync().then(decks => dispatch(receiveDecks(decks)));
+    this.props.handleInitialData();
   }
   /*handleDeckId = title => {
     this.props.navigation.navigate("Decks", {
@@ -36,19 +34,18 @@ class DecksDetails extends Component {
     return (
       <SafeAreaView style={styles.container}>
         <ScrollView>
-          {Object.values(decks) !== undefined ? (
-            Object.values(decks).map(deck => (
-              <DecksView
-                key={deck.title}
-                //title={deck.title}
-                navigation={this.props.navigation}
-                id={deck.title}
-                cardCount={deck.questions.length}
-              />
-            ))
-          ) : (
-            <Text>We don't have any decks</Text>
-          )}
+          {decks
+            ? Object.values(decks) &&
+              Object.values(decks).map(deck => (
+                <DecksView
+                  key={deck.title}
+                  //title={deck.title}
+                  navigation={this.props.navigation}
+                  id={deck.title}
+                  cardCount={deck.questions.length}
+                />
+              ))
+            : null}
         </ScrollView>
       </SafeAreaView>
     );
@@ -57,7 +54,7 @@ class DecksDetails extends Component {
 
 const mapStateToProps = state => {
   //const { deckId } = props.route.params.deckId;
-  const { decks } = state;
+  const decks = state;
   //const { deckId } = this.props.route.params.deckId;
   //const deck = decks[deckId];
   //const decksInfo = Object.values(decks || {});
@@ -67,7 +64,7 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, {})(DecksDetails);
+export default connect(mapStateToProps, { handleInitialData })(DecksDetails);
 
 const styles = StyleSheet.create({
   container: {

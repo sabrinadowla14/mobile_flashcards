@@ -10,8 +10,11 @@ class Decks extends Component {
   state = {};
 
   handleNewCard = () => {
+    const { itemId } = this.props.route.params.itemId;
+    //const { deckInfo } = this.props;
+    // const itemId = deckInfo ? deckInfo.map(deck => deck.itemId) : null;
     this.props.navigation.navigate("AddNewCard", {
-      title: this.props.route.params
+      title: itemId
       // decks: this.props.decks
     });
   };
@@ -40,18 +43,15 @@ class Decks extends Component {
   };
 
   render() {
-    const { navigation, decks } = this.props;
-    //const { itemId } = this.props.route.params;
-    //const { itemId } = this.props.route.params.itemId;
-
-    // const cardCount = decks[itemId] && decks[itemId].questions.length;
-
+    const { navigation, decks, deckInfo } = this.props;
+    const { itemId, cardCount } = this.props.route.params;
     //const cardCount = decks[itemId] ? decks[itemId].questions.length : null;
 
     return (
       <View>
-        <Text> {}</Text>
-        <Text>{} cards.</Text>
+        <Text> {itemId}</Text>
+        <Text>{cardCount} cards.</Text>
+
         <Button title="New Card" onPress={this.handleNewCard} />
         <Button title="Quiz" onPress={this.handleQuiz} />
         <Button title="Delete Deck" onPress={this.handleDeleteDeck} />
@@ -62,6 +62,12 @@ class Decks extends Component {
 
 const mapStateToProps = state => {
   const decks = state;
+  const deckInfo = decks
+    ? Object.values(decks).map(deck => ({
+        itemId: deck.title
+      }))
+    : null;
+
   return {
     decks
   };

@@ -11,10 +11,7 @@ import { white, gray, black } from "../utils/colors";
 
 class DecksView extends Component {
   handleDeck = e => {
-    this.props.navigation.navigate("Decks", {
-      itemId: this.props.id,
-      cardCount: this.props.cardCount
-    });
+    this.props.navigation.navigate("Decks");
   };
 
   render() {
@@ -23,7 +20,7 @@ class DecksView extends Component {
     //const title = this.props.route.params;
     return (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.button} onPress={this.handleDeck}>
+        <TouchableOpacity style={styles.button} onPress={() => this.handleDeck}>
           <Text
             style={{
               color: "lightslategrey",
@@ -32,7 +29,7 @@ class DecksView extends Component {
               paddingBottom: 20
             }}
           >
-            {title}
+            Title {id}
           </Text>
           <Text style={{ color: "lightslategrey", fontSize: 15 }}>
             {cardCount} cards.
@@ -84,6 +81,7 @@ const styles = StyleSheet.create({
   const { deck } = decks[id];
   const title = deck.title;
   const cardCount = deck.questions.length;
+  
 
   return {
     //decks: state,

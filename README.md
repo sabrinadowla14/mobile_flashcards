@@ -56,3 +56,4 @@
   [react-native-asyncstorage](https://blog.jscrambler.com/how-to-use-react-native-asyncstorage/)
   [adding and removing items from redux store](https://medium.com/@ralph1786/adding-and-removing-items-from-redux-store-6d1303ed32c6)
   [[example of navigation]](https://appdividend.com/2018/03/20/react-native-navigation-example-tutorial/)
+  [error-undefine is not an object](https://stackoverflow.com/questions/56095984/react-native-typeerror-typeerror-undefined-is-not-an-object-evaluating-this)

@@ -274,8 +274,8 @@ const mapStateToProps = (state, ownProps) => {
   return {
     // itemId: JSON.parse(JSON.stringify(itemId)),
     // cardCount: JSON.parse(JSON.stringify(cardCount)),
-    itemId,
-    cardCount,
+    // itemId,
+    // cardCount,
     decks: state,
     deck: decks[itemId]
   };
