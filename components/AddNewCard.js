@@ -32,7 +32,7 @@ class AddNewCard extends Component {
   };
   handleCardSubmit = () => {
     // e.preventDefault();
-    const { title } = this.props.route;
+    const { title } = this.props.route.params;
     //const { checkCard } = this.props;
     const { question, answer } = this.state;
     const { card } = cardFormat(question, answer);
@@ -53,7 +53,7 @@ class AddNewCard extends Component {
   };
   render() {
     const { question, answer } = this.state;
-    const { title } = this.props;
+    const { title } = this.props.route.params;
     return (
       <View style={styles.container}>
         <Text> Add a New Card to {title} </Text>

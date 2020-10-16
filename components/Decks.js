@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Text, Button } from "react-native";
 import { connect } from "react-redux";
-import { white } from "../utils/colors";
+import { white, gray, black, green, red, blue, purple } from "../utils/colors";
 import { removeDeck } from "../actions/index";
 import { removeDeckAsync } from "../utils/api";
 //import { decksView } from "./DecksView";
@@ -87,5 +87,47 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingTop: 35,
     backgroundColor: white
+  },
+  input: {
+    paddingLeft: 10,
+    marginTop: 15,
+    height: 45,
+    borderRadius: 5,
+    borderColor: gray,
+    borderWidth: 1
+  },
+  button: {
+    marginTop: 15,
+    borderRadius: 16,
+    backgroundColor: purple,
+    color: white,
+    fontSize: 17,
+    textAlign: "center",
+    padding: 10,
+    margin: 5,
+    height: 50,
+    width: 95
+  },
+  title: {
+    fontSize: 30,
+    fontWeight: "bold"
+  },
+  titleList: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: black
+  },
+  noDataText: {
+    textAlign: "center",
+    fontSize: 20,
+    paddingTop: 20,
+    paddingBottom: 20
+  },
+
+  start: {
+    backgroundColor: green
+  },
+  delete: {
+    backgroundColor: red
   }
 });

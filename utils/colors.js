@@ -5,3 +5,4 @@ export const blueHighlight = "#66d9ff";
 export const gray = "#dedede";
 export const red = "#b30000";
 export const white = "#edf2f4";
+export const purple = "#6a0dad";

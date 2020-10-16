@@ -7,7 +7,7 @@ import {
   StyleSheet
 } from "react-native";
 import { connect } from "react-redux";
-import { white, gray, black } from "../utils/colors";
+import { white, gray, black, green, red, blue, purple } from "../utils/colors";
 
 class DecksView extends Component {
   handleDeck = e => {
@@ -62,8 +62,15 @@ const styles = StyleSheet.create({
     borderWidth: 1
   },
   button: {
-    marginTop: 15,
-    borderRadius: 16
+    borderRadius: 10,
+    backgroundColor: blue,
+    color: black,
+    fontSize: 15,
+    textAlign: "center",
+    padding: 10,
+    margin: 5,
+    height: 35,
+    width: 130
   },
   title: {
     fontSize: 30,
@@ -79,6 +86,23 @@ const styles = StyleSheet.create({
     fontSize: 20,
     paddingTop: 20,
     paddingBottom: 20
+  },
+  btn: {
+    backgroundColor: blue,
+    color: white,
+    fontSize: 17,
+    textAlign: "center",
+    padding: 10,
+    margin: 5,
+    borderRadius: 2,
+    height: 45,
+    width: 100
+  },
+  start: {
+    backgroundColor: green
+  },
+  delete: {
+    backgroundColor: red
   }
 });
 
