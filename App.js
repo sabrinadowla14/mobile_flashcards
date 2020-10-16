@@ -46,29 +46,27 @@ enableScreens();
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
-// Stack navigator
-const DecksStack = createStackNavigator();
-const AddDeckStack = createStackNavigator();
+const AddStack = createStackNavigator();
 
 const StackNavigator = () => (
-  <DecksStack.Navigator
+  <Stack.Navigator
     screenOptions={{
       headerStyle: { backgroundColor: "blue" },
       headerTintColor: "white"
     }}
   >
-    <DecksStack.Screen name="Decks" component={DecksDetails} />
-    <DecksStack.Screen name="DeckDetail" component={Decks} />
-    <DecksStack.Screen name="DecksView" component={DecksView} />
-    <DecksStack.Screen name="AddNewCard" component={AddNewCard} />
-    <DecksStack.Screen name="Quiz" component={Quiz} />
-    <DecksStack.Screen name="DeleteDeck" component={DeleteDeck} />
-  </DecksStack.Navigator>
+    <Stack.Screen name="DecksDetails" component={DecksDetails} />
+    <Stack.Screen name="Decks" component={Decks} />
+
+    <Stack.Screen name="AddNewCard" component={AddNewCard} />
+    <Stack.Screen name="Quiz" component={Quiz} />
+    <Stack.Screen name="DeleteDeck" component={DeleteDeck} />
+  </Stack.Navigator>
 );
 
-const AddDeckStackNavigator = () => (
-  <AddDeckStack.Navigator>
-    <AddDeckStack.Screen
+const AddStackNavigator = () => (
+  <AddStack.Navigator>
+    <AddStack.Screen
       name="AddNewDeck"
       component={AddNewDeck}
       options={{
@@ -81,7 +79,7 @@ const AddDeckStackNavigator = () => (
         }
       }}
     />
-  </AddDeckStack.Navigator>
+  </AddStack.Navigator>
 );
 
 const TabNavigator = () => (
@@ -94,7 +92,7 @@ const TabNavigator = () => (
     }}
   >
     <Tab.Screen
-      name="Decks"
+      name="DecksDetails"
       component={StackNavigator}
       options={{
         tabBarIcon: ({ color, size }) => (
@@ -104,7 +102,7 @@ const TabNavigator = () => (
     />
     <Tab.Screen
       name="Add Deck"
-      component={AddDeckStackNavigator}
+      component={AddStackNavigator}
       options={{
         tabBarIcon: ({ size }) => (
           <MaterialCommunityIcons

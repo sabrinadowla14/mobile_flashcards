@@ -11,16 +11,23 @@ import { white, gray, black } from "../utils/colors";
 
 class DecksView extends Component {
   handleDeck = e => {
-    this.props.navigation.navigate("Decks");
+    this.props.navigation.navigate(
+      "Decks",
+      { itemId: this.props.id },
+      { cardCount: this.props.deck.questions.length }
+    );
   };
 
   render() {
-    const { id, cardCount, title } = this.props;
+    const { id, cardCount, title, deck } = this.props;
 
     //const title = this.props.route.params;
     return (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.button} onPress={() => this.handleDeck}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => this.handleDeck()}
+        >
           <Text
             style={{
               color: "lightslategrey",
@@ -32,7 +39,7 @@ class DecksView extends Component {
             Title {id}
           </Text>
           <Text style={{ color: "lightslategrey", fontSize: 15 }}>
-            Total {cardCount} cards.
+            Total {deck.questions.length} cards.
           </Text>
         </TouchableOpacity>
       </View>
@@ -80,8 +87,7 @@ const styles = StyleSheet.create({
   const { decks } = state;
   const { deck } = decks[id];
   const title = deck.title;
-  const cardCount = deck.questions.length;
-  
+  //const cardCount = deck.questions.length;
 
   return {
     //decks: state,
@@ -89,6 +95,6 @@ const styles = StyleSheet.create({
     cardCount,
     id
   };
-} */
+}*/
 
 export default DecksView;

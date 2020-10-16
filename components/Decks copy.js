@@ -10,7 +10,7 @@ class Decks extends Component {
   state = {};
 
   handleNewCard = () => {
-    const { itemId } = this.props.route.params;
+    const { itemId } = this.props.route.params.itemId;
     //const { deckInfo } = this.props;
     // const itemId = deckInfo ? deckInfo.map(deck => deck.itemId) : null;
     this.props.navigation.navigate("AddNewCard", {

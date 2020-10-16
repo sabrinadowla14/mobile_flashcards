@@ -26,6 +26,7 @@ class DecksDetails extends Component {
     });
   };
 */
+  //handleDeckOnPress = (deckId) => this.props.navigation.navigate("Decks", {deckId});
 
   render() {
     const { decks, navigation } = this.props;
@@ -38,6 +39,7 @@ class DecksDetails extends Component {
               Object.values(decks).map(deck => (
                 <DecksView
                   key={deck.title}
+                  //title={deck.title}
                   navigation={this.props.navigation}
                   id={deck.title}
                   cardCount={deck.questions.length}
@@ -52,7 +54,11 @@ class DecksDetails extends Component {
 }
 
 const mapStateToProps = state => {
+  //const { deckId } = props.route.params.deckId;
   const decks = state;
+  //const { deckId } = this.props.route.params.deckId;
+  //const deck = decks[deckId];
+  //const decksInfo = Object.values(decks || {});
 
   return {
     decks

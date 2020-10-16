@@ -1,8 +1,22 @@
+## Mobile Flash Card
+
+```
+For the UdaciCards project - built a mobile application iOS that allows users to study collections of flashcards. The app allows users to create different categories of flashcards called "decks", add flashcards to those decks, and then take quizzes on those decks.
+```
+
+## Dependencies
+
+VScode, Xcode
+expo version 38.0.8
+Click on Xcode - choose "open developer tools" - choose simulator
+Go to file - open simulator - ios 14.0 - iphone11 Pro
+
 ## How to Run
 
+- git clone https://github.com/sabrinadowla14/mobile_flashcards
+- cd to mobile-flashcards
 - expo install
 - expo start or yarn start
--
 
 ## Development Environment
 
@@ -11,7 +25,7 @@
 - Create Project - expo init mobile-flashcards
 - Choose the blank one
 - In the terminal - expo start
-  i
+- In the terminal choose option i
 
 ## ios - CMD + D to open the Developer Menu
 
@@ -47,7 +61,11 @@
 
 ## Acknowledgement:
 
-- Udacifitness - React-Native class project
+- [Udacifitness - React-Native class project](https://classroom.udacity.com/nanodegrees/nd019/parts/9b15c3b4-c38a-4fcd-8fe7-47937b293a3a)
+  [YouTube-React-Native](https://www.youtube.com/watch?v=0-S5a0eXPoc)
+  [Website - help1](https://github.com/pilartorr/flashcard-react-native)
+  [website - Help2](https://github.com/marcosriani/Mobile-Flashcards)
+  [website - help3](https://github.com/rvalim/mlk-udc-react-proj3)
   [AsyncStorage](https://reactnative.dev/docs/asyncstorage)
   [expo-notification](https://docs.expo.io/versions/latest/sdk/notifications/)
   [expo-Permission](https://docs.expo.io/versions/latest/sdk/permissions/)
