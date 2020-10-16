@@ -32,7 +32,7 @@ class DecksView extends Component {
             Title {id}
           </Text>
           <Text style={{ color: "lightslategrey", fontSize: 15 }}>
-            {cardCount} cards.
+            Total {cardCount} cards.
           </Text>
         </TouchableOpacity>
       </View>

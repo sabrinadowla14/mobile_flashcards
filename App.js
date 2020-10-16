@@ -22,7 +22,7 @@ import middleware from "./middleware/index";
 import { clearLocalNotification, setLocalNotification } from "./utils/helpers";
 import { Icon } from "react-native-elements";
 import { handleInitialData } from "./actions";
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+
 import {
   MarialCommunityIcons,
   MaterialCommunityIcons
@@ -34,7 +34,6 @@ import color from "./utils/colors";
 
 import thunk from "redux-thunk";
 import { enableScreens } from "react-native-screens";
-import { white, blue, red, green, purple } from "./utils/colors";
 
 enableScreens();
 
@@ -51,77 +50,86 @@ const Stack = createStackNavigator();
 const DecksStack = createStackNavigator();
 const AddDeckStack = createStackNavigator();
 
-const Tabs = createMaterialTopTabNavigator();
-
-const TabNav = () => (
-  <Tabs.Navigator
-    initialRouteName="DecksDetails"
-    screenOptions={({ route }) => ({
-      tabBarIcon: ({ color, size }) => {
-        if (route.name === "Decks") {
-          <Ionicons name="ios-bookmarks" size={size} color={color} />;
-        } else if (route.name === "Add Deck") {
-          <FontAwesome name="plus-square" size={size} color={color} />;
-        }
-      }
-    })}
-    tabBarOptions={{
-      activeTintColor: white,
-      //showIcon: true,
-      style: {
-        height: 50,
-        backgroundColor: purple,
-        shadowColor: "rgba(0, 0, 0, 0.24)",
-        shadowOffset: {
-          width: 0,
-          height: 3
-        },
-        shadowRadius: 6,
-        shadowOpacity: 1
-      }
+const StackNavigator = () => (
+  <DecksStack.Navigator
+    screenOptions={{
+      headerStyle: { backgroundColor: "blue" },
+      headerTintColor: "white"
     }}
   >
-    <Tabs.Screen name="Decks" component={DecksDetails} />
-    <Tabs.Screen name="Add Deck" component={AddNewDeck} />
-  </Tabs.Navigator>
+    <DecksStack.Screen name="Decks" component={DecksDetails} />
+    <DecksStack.Screen name="DeckDetail" component={Decks} />
+    <DecksStack.Screen name="DecksView" component={DecksView} />
+    <DecksStack.Screen name="AddNewCard" component={AddNewCard} />
+    <DecksStack.Screen name="Quiz" component={Quiz} />
+    <DecksStack.Screen name="DeleteDeck" component={DeleteDeck} />
+  </DecksStack.Navigator>
 );
 
-//const Stack = createStackNavigator();
-const StackNavigator = () => (
-  <Stack.Navigator headerMode="screen">
-    <Stack.Screen
-      name="Home"
-      component={TabNav}
-      options={{ headerShown: false }}
+const AddDeckStackNavigator = () => (
+  <AddDeckStack.Navigator>
+    <AddDeckStack.Screen
+      name="AddNewDeck"
+      component={AddNewDeck}
+      options={{
+        headerStyle: {
+          backgroundColor: "lightskyblue"
+        },
+        headerTintColor: "#fff",
+        headerTitleStyle: {
+          fontWeight: "bold"
+        }
+      }}
     />
-    <Stack.Screen
+  </AddDeckStack.Navigator>
+);
+
+const TabNavigator = () => (
+  <Tab.Navigator
+    tabBarOptions={{
+      activeBackgroundColor: "orange",
+      activeTintColor: "white",
+      inactiveBackgroundColor: "#eee",
+      inactiveTintColor: "red"
+    }}
+  >
+    <Tab.Screen
       name="Decks"
-      component={Decks}
-      options={{ headerShown: false }}
+      component={StackNavigator}
+      options={{
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="home" size={size} color={color} />
+        )
+      }}
     />
-    <Stack.Screen
-      name="AddCard"
-      component={AddNewCard}
-      options={{ headerShown: false }}
+    <Tab.Screen
+      name="Add Deck"
+      component={AddDeckStackNavigator}
+      options={{
+        tabBarIcon: ({ size }) => (
+          <MaterialCommunityIcons
+            name="plus-circle"
+            size={size}
+            color={color}
+          />
+        )
+      }}
     />
-    <Stack.Screen
-      name="Quiz"
-      component={Quiz}
-      options={{ headerShown: false }}
-    />
-  </Stack.Navigator>
+  </Tab.Navigator>
 );
 
 class App extends React.Component {
   componentDidMount() {
     setLocalNotification();
+    store.dispatch(handleInitialData());
   }
+
   render() {
     return (
       <Provider store={store}>
         <View style={{ flex: 1 }}>
           <NavigationContainer>
-            <StackNavigator />
+            <TabNavigator />
           </NavigationContainer>
         </View>
       </Provider>
