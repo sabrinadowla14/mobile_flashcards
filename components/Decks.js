@@ -54,12 +54,21 @@ class Decks extends Component {
     // <Text>{deckInfo ? deckInfo.map(deck => deck.itemId) : null}</Text>
     return (
       <View style={styles.container}>
-        <Text> {itemId}</Text>
-        <Text>{cardLen} cards.</Text>
+        <Text style={styles.title}> {itemId}</Text>
+        <Text style={styles.title}>{cardLen} cards.</Text>
 
-        <Button title="New Card" onPress={this.handleNewCard} />
-        <Button title="Quiz" onPress={this.handleQuiz} />
-        <Button title="Delete Deck" onPress={this.handleDeleteDeck} />
+        <Button
+          buttonStyle={styles.addCardBtn}
+          title="New Card"
+          onPress={this.handleNewCard}
+          color="#9C27B0"
+        />
+        <Button title="Quiz" onPress={this.handleQuiz} color="green" />
+        <Button
+          title="Delete Deck"
+          onPress={this.handleDeleteDeck}
+          color="maroon"
+        />
       </View>
     );
   }
@@ -86,7 +95,8 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     paddingTop: 35,
-    backgroundColor: white
+    backgroundColor: white,
+    marginTop: 150
   },
   input: {
     paddingLeft: 10,
@@ -108,9 +118,24 @@ const styles = StyleSheet.create({
     height: 50,
     width: 95
   },
+  addCardBtn: {
+    marginTop: 50,
+    borderRadius: 15,
+    backgroundColor: "#9C27B0",
+    color: white,
+    fontSize: 15,
+    textAlign: "center",
+    padding: 5,
+    margin: 5,
+    height: 50,
+    width: 95
+  },
   title: {
-    fontSize: 30,
-    fontWeight: "bold"
+    fontSize: 15,
+    fontWeight: "bold",
+    color: black,
+    marginLeft: 135,
+    marginBottom: 20
   },
   titleList: {
     fontSize: 20,
@@ -122,6 +147,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     paddingTop: 20,
     paddingBottom: 20
+  },
+
+  card: {
+    fontSize: 25
   },
 
   start: {

@@ -4,10 +4,16 @@
 For the UdaciCards project - built a mobile application iOS that allows users to study collections of flashcards. The app allows users to create different categories of flashcards called "decks", add flashcards to those decks, and then take quizzes on those decks.
 ```
 
+##
+
 ## Dependencies
 
-VScode, Xcode
-expo version 38.0.8
+VScode, Xcode, Visual Studio Code(editor)
+expo version: 38.0.8
+node version: 12.14.1
+
+## How to open Xcode
+
 Click on Xcode - choose "open developer tools" - choose simulator
 Go to file - open simulator - ios 14.0 - iphone11 Pro
 

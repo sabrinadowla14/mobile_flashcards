@@ -4,10 +4,11 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
-  StyleSheet
+  StyleSheet,
+  Animated
 } from "react-native";
 import { connect } from "react-redux";
-import { white, gray, black, green, red, blue, purple } from "../utils/colors";
+import { white, gray, black, green, red, blue, maroon } from "../utils/colors";
 
 class DecksView extends Component {
   handleDeck = e => {
@@ -21,26 +22,15 @@ class DecksView extends Component {
   render() {
     const { id, cardCount, title, deck } = this.props;
 
-    //const title = this.props.route.params;
     return (
       <View style={styles.container}>
         <TouchableOpacity
           style={styles.button}
           onPress={() => this.handleDeck()}
         >
-          <Text
-            style={{
-              color: "lightslategrey",
-              fontWeight: "bold",
-              fontSize: 20,
-              paddingBottom: 20
-            }}
-          >
-            Title {id}
-          </Text>
-          <Text style={{ color: "lightslategrey", fontSize: 15 }}>
-            Total {deck.questions.length} cards.
-          </Text>
+          <Text style={styles.title}>Title {id}</Text>
+
+          <Text style={styles.card}>Total {deck.questions.length} cards.</Text>
         </TouchableOpacity>
       </View>
     );
@@ -62,19 +52,37 @@ const styles = StyleSheet.create({
     borderWidth: 1
   },
   button: {
-    borderRadius: 10,
-    backgroundColor: blue,
+    borderRadius: 25,
+    backgroundColor: gray,
     color: black,
     fontSize: 15,
     textAlign: "center",
-    padding: 10,
+    height: 25,
+    width: 110
+  },
+  btn: {
+    borderRadius: 10,
+    backgroundColor: gray,
+    color: black,
+    fontSize: 20,
+    textAlign: "center",
+    padding: 5,
     margin: 5,
     height: 35,
     width: 130
   },
   title: {
-    fontSize: 30,
-    fontWeight: "bold"
+    fontSize: 15,
+    fontWeight: "bold",
+    color: black,
+    textAlign: "center",
+    padding: 5,
+    marginBottom: 5
+  },
+  card: {
+    marginTop: 5,
+    fontSize: 15,
+    color: maroon
   },
   titleList: {
     fontSize: 20,
@@ -105,20 +113,5 @@ const styles = StyleSheet.create({
     backgroundColor: red
   }
 });
-
-/*function mapStateToProps(state, { id }) {
-  //const { deckId } = props.route.params.deckId;
-  const { decks } = state;
-  const { deck } = decks[id];
-  const title = deck.title;
-  //const cardCount = deck.questions.length;
-
-  return {
-    //decks: state,
-
-    cardCount,
-    id
-  };
-}*/
 
 export default DecksView;

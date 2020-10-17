@@ -6,3 +6,7 @@ export const gray = "#dedede";
 export const red = "#b30000";
 export const white = "#edf2f4";
 export const purple = "#6a0dad";
+export const maroon = "#922B21";
+export const lightBlue = "#D6EAF8";
+export const green = "#008000";
+export const lightRed = "#E6B0AA";

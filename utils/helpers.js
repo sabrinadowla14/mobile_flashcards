@@ -24,7 +24,7 @@ const NOTIFICATION_KEY = "Flashcards:Notifications";
 
 export function getDailyReminderValue() {
   return {
-    today: "👋 Don't forget to log your data today!"
+    today: "👋 You need to log data today!"
   };
 }
 
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   }
 });
 
-export function getDeckInfo(metric) {
+/*export function getDeckInfo(metric) {
   const info = {
     run: {
       displayName: "Run",
@@ -59,7 +59,7 @@ export function getDeckInfo(metric) {
   };
 
   return typeof metric === "undefined" ? info : info[metric];
-}
+}*/
 export function generateId() {
   return (
     Math.random()
@@ -76,7 +76,6 @@ export function clearLocalNotification() {
     try {
       Notifications.cancelAllScheduledNotificationsAsync();
     } catch (error) {
-      // treat error here
       console.log(error);
     }
   });
@@ -84,8 +83,8 @@ export function clearLocalNotification() {
 
 function createNotification() {
   return {
-    title: "Log your stats!",
-    body: "👋 don't forget to log your stats for today!",
+    title: "Please log the status of you Quiz!",
+    body: "👋 don't forget to take the Quiz today!",
     ios: {
       sound: true
     },

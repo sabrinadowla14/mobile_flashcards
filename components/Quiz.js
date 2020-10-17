@@ -1,7 +1,7 @@
 import * as React from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
-import { white, blue, red, green, purple } from "../utils/colors";
+import { white, blue, red, green, purple, maroon } from "../utils/colors";
 import { clearLocalNotification, setLocalNotification } from "../utils/helpers";
 
 class Quiz extends React.Component {
@@ -13,18 +13,6 @@ class Quiz extends React.Component {
     totalNoOfQuestions: 0
   };
 
-  componentDidMount = () => {
-    this.setState({
-      ...this.state,
-      questions: this.props.deck.questions
-    });
-  };
-
-  handlePageChange = () => {
-    this.setState({
-      visibleAns: true
-    });
-  };
   handleQuizAnswer = value => {
     const { index, totalNoOfQuestions, noOfCorrectAns } = this.state;
     const { cardCount } = this.props;
@@ -59,13 +47,7 @@ class Quiz extends React.Component {
     });
   };
   render() {
-    const {
-      questions,
-      visibleAns,
-      index,
-      noOfCorrectAns,
-      totalNoOfQuestions
-    } = this.state;
+    const { visibleAns, index, noOfCorrectAns } = this.state;
     const { itemId, cardCount, deck, decks } = this.props;
 
     if (cardCount === 0) {
@@ -77,19 +59,21 @@ class Quiz extends React.Component {
     }
 
     if (this.state.visibleAns === true) {
-      const per = (noOfCorrectAns / cardCount) * 100;
+      const noOfCorrectAns = this.state.noOfCorrectAns + 1;
+      const percentageCheck = (noOfCorrectAns / cardCount) * 100;
 
       return (
         <View style={styles.block}>
           <View>
-            <Text style={styles.headingBlock}>Done Quiz !</Text>
-            <Text style={[styles.textBlock, styles.textRed]}>
-              {noOfCorrectAns} / {cardCount} correct
+            <Text style={styles.heading}>You completed your Quiz !</Text>
+            <Text style={styles.title}>
+              Correct Answer is: {noOfCorrectAns} / {cardCount}
             </Text>
           </View>
           <View>
-            <Text style={(styles.textBlock, styles.percent)}>Result in %</Text>
-            <Text style={[styles.textBlock, styles.textRed]}>{per}%</Text>
+            <Text style={styles.title}>
+              Output in percentage: {percentageCheck}%
+            </Text>
           </View>
           <View style={styles.btnContainer}>
             <TouchableOpacity
@@ -97,16 +81,16 @@ class Quiz extends React.Component {
                 this.startQuiz();
               }}
             >
-              <Text style={[styles.btn, styles.btnRed]}>Start Quiz</Text>
+              <Text style={[styles.btnStart]}>Start Quiz</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
                 this.props.navigation.navigate("Decks", {
-                  itemId: this.props.deck.title
+                  itemId: this.props.decks[itemId].title
                 });
               }}
             >
-              <Text style={[styles.btn, styles.btnGreen]}>Go To Decks</Text>
+              <Text style={[styles.title]}>Go To Decks</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -115,14 +99,14 @@ class Quiz extends React.Component {
 
     return (
       <View key={index}>
-        <Text style={styles.numberOfQuestions}>
+        <Text style={styles.cardCount}>
           {index + 1}/{this.props.cardCount}
         </Text>
         <View style={{ alignItems: "center" }}>
-          {this.state.showAnswer ? (
+          {this.state.visibleAns ? (
             <View style={styles.card}>
               <Text style={styles.title}>Answer</Text>
-              <Text>
+              <Text style={styles.title}>
                 {decks[itemId] &&
                   decks[itemId].questions[this.state.index] &&
                   decks[itemId].questions[this.state.index].answer}
@@ -144,13 +128,13 @@ class Quiz extends React.Component {
             <TouchableOpacity
               onPress={() => this.setState({ visibleAns: true })}
             >
-              <Text style={styles.switchBtn}>Answer</Text>
+              <Text style={styles.title}>Answer</Text>
             </TouchableOpacity>
           ) : (
             <TouchableOpacity
               onPress={() => this.setState({ visibleAns: false })}
             >
-              <Text style={styles.switchBtn}>Question</Text>
+              <Text style={styles.title}>Question</Text>
             </TouchableOpacity>
           )}
         </View>
@@ -162,7 +146,7 @@ class Quiz extends React.Component {
         </View>
         <View style={styles.btnContainer}>
           <TouchableOpacity onPress={() => this.handleQuizAnswer("NOT OK")}>
-            <Text style={styles.btn}>In Correct</Text>
+            <Text style={styles.btn}>Not Correct</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -173,24 +157,24 @@ class Quiz extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
-    justifyContent: "space-around"
+    padding: 17,
+    justifyContent: "center"
   },
-  numberOfQuestions: {
-    color: purple,
+  cardCount: {
+    color: "#148F77",
     fontWeight: "bold",
     padding: 10
   },
   heading: {
     fontSize: 40,
     textAlign: "center",
-    color: purple,
+    color: green,
     fontWeight: "bold",
     marginTop: 100
   },
-  switchBtn: {
-    marginTop: 20,
-    color: red,
+  title: {
+    marginTop: 25,
+    color: "#E680AA",
     fontWeight: "bold",
     fontSize: 20,
     textAlign: "center"
@@ -208,61 +192,50 @@ const styles = StyleSheet.create({
     margin: 5,
     borderRadius: 2,
     height: 45,
-    width: 100
+    width: 120
   },
-  btnGreen: {
-    backgroundColor: green
+  btnTitle: {
+    backgroundColor: green,
+    color: white,
+    fontSize: 17,
+    textAlign: "center",
+    padding: 10,
+    margin: 5,
+    borderRadius: 2,
+    height: 45,
+    width: 120
   },
-  btnRed: {
-    backgroundColor: red
+  btnStart: {
+    backgroundColor: maroon,
+    color: white,
+    fontSize: 17,
+    textAlign: "center",
+    padding: 10,
+    margin: 5,
+    borderRadius: 2,
+    height: 45,
+    width: 120
   },
-  btnBlue: {
-    backgroundColor: blue
-  },
-  btnPurple: {
-    backgroundColor: purple
-  },
+
   block: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center"
   },
-  headingBlock: {
-    fontSize: 40,
-    textAlign: "center",
-    color: green,
-    fontWeight: "bold"
-  },
+
   textBlock: {
     fontSize: 20,
     textAlign: "center",
     padding: 10,
     fontWeight: "bold"
-  },
-  percent: {
-    fontSize: 25,
-    paddingTop: 20
-  },
-  textRed: {
-    color: red
   }
 });
 
-/*const mapStateToProps = (state, { route }) => {
-  const title = route.params.title;
-  const deck = state[title];
-  return {
-    title,
-    deck
-  };
-};*/
-const mapStateToProps = (state, ownProps) => {
-  const { itemId, cardCount } = ownProps.route.params;
+const mapStateToProps = (state, props) => {
+  const { itemId, cardCount } = props.route.params;
   const decks = state;
 
   return {
-    // itemId: JSON.parse(JSON.stringify(itemId)),
-    // cardCount: JSON.parse(JSON.stringify(cardCount)),
     itemId,
     cardCount,
     decks: state,
