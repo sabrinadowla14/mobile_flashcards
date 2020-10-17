@@ -40,26 +40,6 @@ const styles = StyleSheet.create({
   }
 });
 
-/*export function getDeckInfo(metric) {
-  const info = {
-    run: {
-      displayName: "Run",
-      max: 50,
-      unti: "miles",
-      step: 1,
-      type: "steppers",
-      getIcon() {
-        return (
-          <View style={[styles.iconContainer, { backgroundColor: red }]}>
-            <MaterialIcons name="directions-run" color="white" size={35} />
-          </View>
-        );
-      }
-    }
-  };
-
-  return typeof metric === "undefined" ? info : info[metric];
-}*/
 export function generateId() {
   return (
     Math.random()

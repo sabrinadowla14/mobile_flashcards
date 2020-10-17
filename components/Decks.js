@@ -4,24 +4,19 @@ import { connect } from "react-redux";
 import { white, gray, black, green, red, blue, purple } from "../utils/colors";
 import { removeDeck } from "../actions/index";
 import { removeDeckAsync } from "../utils/api";
-//import { decksView } from "./DecksView";
 
 class Decks extends Component {
   state = {};
 
   handleNewCard = () => {
     const { itemId } = this.props.route.params;
-    //const { deckInfo } = this.props;
-    // const itemId = deckInfo ? deckInfo.map(deck => deck.itemId) : null;
+
     this.props.navigation.navigate("AddNewCard", {
       title: itemId
-      // decks: this.props.decks
     });
   };
 
   handleQuiz = () => {
-    //const { deckId } = this.props.routes.params.id;
-
     const { itemId, cardCount } = this.props.route.params;
 
     this.props.navigation.navigate("Quiz", {
@@ -35,23 +30,17 @@ class Decks extends Component {
   handleDeleteDeck = () => {
     const { removeDeck, navigation, decks } = this.props;
     const { itemId } = this.props.route.params.itemId;
-    //const deck = decks[itemId];
-    //const id = deck.title;
+
     removeDeck(this.props.route.params.itemId);
     removeDeckAsync(this.props.route.params.itemId);
-    //navigation.goBack();
   };
 
   render() {
     const { navigation, decks, deckInfo } = this.props;
     const { itemId, cardCount } = this.props.route.params;
-    //const { itemId } = this.props.route.params;
-    //const { itemId } = this.props.route.params.itemId;
 
     const cardLen = decks[itemId] && decks[itemId].questions.length;
 
-    //const cardCount = decks[itemId] ? decks[itemId].questions.length : null;
-    // <Text>{deckInfo ? deckInfo.map(deck => deck.itemId) : null}</Text>
     return (
       <View style={styles.container}>
         <Text style={styles.title}> {itemId}</Text>
@@ -87,7 +76,7 @@ const mapStateToProps = state => {
     deckInfo
   };
 };
-// uncomment the mapStateToProps later
+
 export default connect(mapStateToProps, { removeDeck })(Decks);
 
 const styles = StyleSheet.create({

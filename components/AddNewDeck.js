@@ -13,7 +13,7 @@ import {
 import { connect } from "react-redux";
 import { addDeck } from "../actions";
 import { saveDeckTitleAsync } from "../utils/api";
-//import DecksDetails from "./DecksDetails";
+
 import { white, gray, black, green, red, blue, maroon } from "../utils/colors";
 import color from "../utils/colors";
 
@@ -22,25 +22,22 @@ class AddNewDeck extends Component {
     title: ""
   };
   handleInputTitleChange = title => {
-    //e.preventDefault();
-
     this.setState({
       title
     });
   };
   handleDeckTitleSubmit = () => {
-    // e.preventDefault();
     const { title } = this.state;
     const { decks, deckTitle } = this.props;
     const lenTitle = title.length;
-    // title exist
+
     if (lenTitle > 0) {
       if (deckTitle === undefined) {
         this.props.addDeck(title);
         saveDeckTitleAsync(title);
 
-        Alert.alert(`${title} created!`);
-        //this.props.navigation.navigate("Decks", { itemId: this.state.title });
+        Alert.alert(`New Deck is: ${title}`);
+
         this.props.navigation.navigate("Decks", {
           itemId: this.state.title
         });
@@ -82,7 +79,6 @@ class AddNewDeck extends Component {
 }
 
 const mapStateToProps = (state, { route }) => {
-  // const { deckId } = props.route.params.id
   const { decks } = state;
   const { title } = route.params.title;
   const deckTitle = decks
@@ -94,14 +90,6 @@ const mapStateToProps = (state, { route }) => {
     deckTitle
   };
 };
-
-/*function mapDispatchToProps(dispatch) {
-  return {
-    handleAddDeck: title => {
-      dispatch(handleAddDeck(title));
-    }
-  };
-}*/
 
 export default connect(null, { addDeck })(AddNewDeck);
 

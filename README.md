@@ -4,7 +4,18 @@
 For the UdaciCards project - built a mobile application iOS that allows users to study collections of flashcards. The app allows users to create different categories of flashcards called "decks", add flashcards to those decks, and then take quizzes on those decks.
 ```
 
-##
+## Functionality of mobile flashcard
+
+- DecksDetails.js is the primary view, seen when the app loads.
+  - list of created decks which includes the name of each deck and the number of cards.
+  - Pressing the deck in the list route to an individual deck view.
+  - The individual deck includes
+    - title
+    - number of cards
+    - Quiz button
+    - Add card button
+- Logic for the notification has been implemented.
+- The App works in iOS device
 
 ## Dependencies
 
@@ -81,3 +92,5 @@ Go to file - open simulator - ios 14.0 - iphone11 Pro
   [adding and removing items from redux store](https://medium.com/@ralph1786/adding-and-removing-items-from-redux-store-6d1303ed32c6)
   [[example of navigation]](https://appdividend.com/2018/03/20/react-native-navigation-example-tutorial/)
   [error-undefine is not an object](https://stackoverflow.com/questions/56095984/react-native-typeerror-typeerror-undefined-is-not-an-object-evaluating-this)
+  [react-native-hook](https://medium.com/trabe/react-useref-hook-b6c9d39e2022)
+  [Animated](https://docs.expo.io/versions/latest/react-native/animated/)

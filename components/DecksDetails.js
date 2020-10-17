@@ -20,16 +20,10 @@ class DecksDetails extends Component {
   componentDidMount() {
     this.props.handleInitialData();
   }
-  /*handleDeckId = title => {
-    this.props.navigation.navigate("Decks", {
-      itemId: deck.title
-    });
-  };
-*/
 
   render() {
     const { decks, navigation } = this.props;
-    // const { deckId } = this.props.route.params.deckId;
+
     return (
       <SafeAreaView style={styles.container}>
         <ScrollView>
@@ -39,7 +33,7 @@ class DecksDetails extends Component {
                 <DecksView
                   key={deck.title}
                   navigation={this.props.navigation}
-                  id={deck.title}
+                  deckId={deck.title}
                   cardCount={deck.questions.length}
                   deck={deck}
                 />

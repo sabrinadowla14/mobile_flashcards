@@ -31,25 +31,21 @@ class AddNewCard extends Component {
     });
   };
   handleCardSubmit = () => {
-    // e.preventDefault();
     const { title } = this.props.route.params;
-    //const { checkCard } = this.props;
+
     const { question, answer } = this.state;
     const { card } = cardFormat(question, answer);
     const { addCard } = this.props;
-    //const { goBack } = this.props.navigation;
 
     addCard(title, card);
     addCardToDeck(title, card);
 
     this.props.navigation.navigate("Decks", { itemId: title });
 
-    //addCardToDeck(deck, card);
     this.setState({
       question: "",
       answer: ""
     });
-    //this.props.navigation.navigate("Decks");
   };
   render() {
     const { question, answer } = this.state;
@@ -82,16 +78,10 @@ class AddNewCard extends Component {
 function mapStateToProps(state, { route }) {
   const { decks } = state;
   const { title } = route.params;
-  //const checkCard = decks
-  //  ? Object.values(decks).map(deck => ({ card: deck.questions
-
-  // }))
-  //  : null;
 
   return {
     decks,
     title
-    // checkCard
   };
 }
 

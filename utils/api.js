@@ -21,18 +21,6 @@ export const getDecksAsync = async () => {
   }
 };
 
-/*export async function getDecksAsync() {
-  try {
-    const decksStorage = await AsyncStorage.getItem(DECKS_KEY);
-    if (decksStorage === null) {
-      AsyncStorage.setItem(DECKS_KEY, JSON.stringify(startingDecks));
-    }
-    return decksStorage === null ? decks : JSON.parse(decksStorage);
-  } catch (e) {
-    console.log(e);
-  }
-}*/
-
 // get one deck
 export const getDeckAsync = async id => {
   try {
@@ -60,7 +48,7 @@ export const saveDeckTitleAsync = async title => {
   }
 };
 
-// add card to deck
+// add card
 export const addCardToDeck = async (title, card) => {
   try {
     const deck = await getDeckAsync(title);
@@ -78,25 +66,7 @@ export const addCardToDeck = async (title, card) => {
   }
 };
 
-/*export async function addCardToDeck(title, card) {
-  try {
-    //const deck = await getDeck(deckId);
-
-    await AsyncStorage.getItem(DECKS_KEY).then(results => {
-      const data = JSON.parse(results);
-      Object.keys(data).map(id => {
-        if (id === title) {
-          data[id].questions.push(card);
-        }
-      });
-      AsyncStorage.setItem(DECKS_KEY, JSON.stringify(data));
-    });
-  } catch (err) {
-    console.log(err);
-  }
-}
-*/
-// delete a deck
+// delete the deck
 export const removeDeckAsync = async id => {
   try {
     const decksData = await AsyncStorage.getItem(DECKS_KEY);

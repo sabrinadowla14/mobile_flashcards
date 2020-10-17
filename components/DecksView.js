@@ -4,8 +4,7 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
-  StyleSheet,
-  Animated
+  StyleSheet
 } from "react-native";
 import { connect } from "react-redux";
 import { white, gray, black, green, red, blue, maroon } from "../utils/colors";
@@ -14,13 +13,13 @@ class DecksView extends Component {
   handleDeck = e => {
     this.props.navigation.navigate(
       "Decks",
-      { itemId: this.props.id },
+      { itemId: this.props.deckId },
       { cardCount: this.props.deck.questions.length }
     );
   };
 
   render() {
-    const { id, cardCount, title, deck } = this.props;
+    const { deckId, cardCount, title, deck } = this.props;
 
     return (
       <View style={styles.container}>
@@ -28,7 +27,7 @@ class DecksView extends Component {
           style={styles.button}
           onPress={() => this.handleDeck()}
         >
-          <Text style={styles.title}>Title {id}</Text>
+          <Text style={styles.title}>{deckId}</Text>
 
           <Text style={styles.card}>Total {deck.questions.length} cards.</Text>
         </TouchableOpacity>
