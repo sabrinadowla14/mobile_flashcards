@@ -6,8 +6,6 @@ import { clearLocalNotification, setLocalNotification } from "../utils/helpers";
 
 class Quiz extends React.Component {
   state = {
-    questions: [],
-
     index: 0,
     noOfCorrectAns: 0,
     noOfIncorrectAns: 0,
@@ -27,11 +25,11 @@ class Quiz extends React.Component {
       visibleAns: true
     });
   };
-  handleQuizAnswer = answer => {
+  handleQuizAnswer = value => {
     const { index, totalNoOfQuestions, noOfCorrectAns } = this.state;
     const { cardCount } = this.props;
 
-    if (answer === quizVar) {
+    if (value === "ok") {
       this.setState({
         noOfCorrectAns: this.state.noOfCorrectAns + 1,
         index: this.state.index + 1,
@@ -40,9 +38,7 @@ class Quiz extends React.Component {
     } else {
       this.setState({
         noOfCorrectAns: this.state.noOfCorrectAns,
-        visibleAns: false,
-        userAns: null,
-        quizVar: "Not OK"
+        visibleAns: false
       });
     }
 
@@ -53,15 +49,13 @@ class Quiz extends React.Component {
       this.setState({ visibleAns: false });
     }
   };
-  resetQuiz = () => {
+
+  startQuiz = () => {
     this.setState({
       visibleAns: false,
       noOfCorrectAns: 0,
       noOfIncorrectAns: 0,
-      usersAns: null,
-      userAns: 0,
-      index: 0,
-      quizVar: "OK"
+      index: 0
     });
   };
   render() {
@@ -83,8 +77,8 @@ class Quiz extends React.Component {
     }
 
     if (this.state.visibleAns === true) {
-      const percent = (noOfCorrectAns / cardCount) * 100;
-      const { itemId, carCount, deck, decks } = this.props;
+      const per = (noOfCorrectAns / cardCount) * 100;
+
       return (
         <View style={styles.block}>
           <View>
@@ -95,29 +89,24 @@ class Quiz extends React.Component {
           </View>
           <View>
             <Text style={(styles.textBlock, styles.percent)}>Result in %</Text>
-            <Text style={[styles.textBlock, styles.textRed]}>{percent}%</Text>
+            <Text style={[styles.textBlock, styles.textRed]}>{per}%</Text>
           </View>
           <View style={styles.btnContainer}>
             <TouchableOpacity
-              onPress={() =>
-                this.props.navigation.replace("Quiz", { itemId: itemId })
-              }
+              onPress={() => {
+                this.startQuiz();
+              }}
             >
               <Text style={[styles.btn, styles.btnRed]}>Start Quiz</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                this.props.navigation.goBack();
+                this.props.navigation.navigate("Decks", {
+                  itemId: this.props.deck.title
+                });
               }}
             >
-              <Text style={[styles.btn, styles.btnGreen]}>Go Back</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                this.props.navigation.navigate("Home");
-              }}
-            >
-              <Text style={[styles.btn, styles.btnPurple]}>Home</Text>
+              <Text style={[styles.btn, styles.btnGreen]}>Go To Decks</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -168,12 +157,12 @@ class Quiz extends React.Component {
 
         <View style={styles.btnContainer}>
           <TouchableOpacity onPress={() => this.handleQuizAnswer("OK")}>
-            <Text style={[styles.btn, styles.btnGreen]}>Correct</Text>
+            <Text style={styles.btn}>Correct</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.btnContainer}>
           <TouchableOpacity onPress={() => this.handleQuizAnswer("NOT OK")}>
-            <Text style={[styles.btn, styles.btnGreen]}>In Correct</Text>
+            <Text style={styles.btn}>In Correct</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -274,8 +263,8 @@ const mapStateToProps = (state, ownProps) => {
   return {
     // itemId: JSON.parse(JSON.stringify(itemId)),
     // cardCount: JSON.parse(JSON.stringify(cardCount)),
-    // itemId,
-    // cardCount,
+    itemId,
+    cardCount,
     decks: state,
     deck: decks[itemId]
   };

@@ -48,14 +48,14 @@ class Decks extends Component {
     //const { itemId } = this.props.route.params;
     //const { itemId } = this.props.route.params.itemId;
 
-    // const cardCount = decks[itemId] && decks[itemId].questions.length;
+    const cardLen = decks[itemId] && decks[itemId].questions.length;
 
     //const cardCount = decks[itemId] ? decks[itemId].questions.length : null;
     // <Text>{deckInfo ? deckInfo.map(deck => deck.itemId) : null}</Text>
     return (
       <View style={styles.container}>
         <Text> {itemId}</Text>
-        <Text>{cardCount} cards.</Text>
+        <Text>{cardLen} cards.</Text>
 
         <Button title="New Card" onPress={this.handleNewCard} />
         <Button title="Quiz" onPress={this.handleQuiz} />
