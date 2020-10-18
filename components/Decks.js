@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Text, Button } from "react-native";
+import { StyleSheet, View, Text, Button, Alert } from "react-native";
 import { connect } from "react-redux";
 import { white, gray, black, green, red, blue, purple } from "../utils/colors";
 import { removeDeck } from "../actions/index";
@@ -29,10 +29,11 @@ class Decks extends Component {
 
   handleDeleteDeck = () => {
     const { removeDeck, navigation, decks } = this.props;
-    const { itemId } = this.props.route.params.itemId;
+    const { itemId } = this.props.route.params;
 
-    removeDeck(this.props.route.params.itemId);
-    removeDeckAsync(this.props.route.params.itemId);
+    removeDeck(itemId);
+    removeDeckAsync(itemId);
+    Alert.alert(`${itemId} is deleted.`);
   };
 
   render() {

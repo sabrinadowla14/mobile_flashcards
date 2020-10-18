@@ -20,17 +20,20 @@ class Quiz extends React.Component {
     if (value === "ok") {
       this.setState({
         noOfCorrectAns: this.state.noOfCorrectAns + 1,
-        index: this.state.index + 1,
-        visibleAns: true
+        totalNoOfQuestions: this.state.totalNoOfQuestions + 1,
+        index: this.state.index + 1
+        // visibleAns: true
       });
     } else {
       this.setState({
         noOfCorrectAns: this.state.noOfCorrectAns,
-        visibleAns: false
+        totalNoOfQuestions: this.state.totalNoOfQuestions + 1,
+        index: this.state.index + 1
+        // visibleAns: false
       });
     }
 
-    if (index + 1 === cardCount) {
+    if (totalNoOfQuestions + 1 === cardCount) {
       clearLocalNotification().then(setLocalNotification);
       this.setState({ visibleAns: true });
     } else {
@@ -40,14 +43,20 @@ class Quiz extends React.Component {
 
   startQuiz = () => {
     this.setState({
-      visibleAns: false,
+      index: 0,
       noOfCorrectAns: 0,
       noOfIncorrectAns: 0,
-      index: 0
+      visibleAns: false,
+      totalNoOfQuestions: 0
     });
   };
   render() {
-    const { visibleAns, index, noOfCorrectAns } = this.state;
+    const {
+      visibleAns,
+      index,
+      noOfCorrectAns,
+      totalNoOfQuestions
+    } = this.state;
     const { itemId, cardCount, deck, decks } = this.props;
 
     if (cardCount === 0) {
@@ -68,6 +77,11 @@ class Quiz extends React.Component {
             <Text style={styles.heading}>You completed your Quiz !</Text>
             <Text style={styles.title}>
               Correct Answer is: {noOfCorrectAns} / {cardCount}
+            </Text>
+            <Text style={styles.title}>
+              {decks[itemId] &&
+                decks[itemId].questions[this.state.totalNoOfQuestions] &&
+                decks[itemId].questions[this.state.totalNoOfQuestions].answer}
             </Text>
           </View>
           <View>
@@ -105,11 +119,11 @@ class Quiz extends React.Component {
         <View style={{ alignItems: "center" }}>
           {this.state.visibleAns ? (
             <View style={styles.card}>
-              <Text style={styles.title}>Answer</Text>
+              <Text style={styles.title}>Show Answer</Text>
               <Text style={styles.title}>
                 {decks[itemId] &&
-                  decks[itemId].questions[this.state.index] &&
-                  decks[itemId].questions[this.state.index].answer}
+                  decks[itemId].questions[this.state.totalNoOfQuestions] &&
+                  decks[itemId].questions[this.state.totalNoOfQuestions].answer}
               </Text>
             </View>
           ) : (
@@ -118,8 +132,9 @@ class Quiz extends React.Component {
 
               <Text>
                 {decks[itemId] &&
-                  decks[itemId].questions[this.state.index] &&
-                  decks[itemId].questions[this.state.index].question}
+                  decks[itemId].questions[this.state.totalNoOfQuestions] &&
+                  decks[itemId].questions[this.state.totalNoOfQuestions]
+                    .question}
               </Text>
             </View>
           )}

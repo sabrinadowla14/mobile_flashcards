@@ -34,11 +34,17 @@ class AddNewCard extends Component {
     const { title } = this.props.route.params;
 
     const { question, answer } = this.state;
-    const { card } = cardFormat(question, answer);
+    //const { card } = cardFormat(question, answer);
     const { addCard } = this.props;
+
+    const card = {
+      question: this.state.question,
+      answer: this.state.answer
+    };
 
     addCard(title, card);
     addCardToDeck(title, card);
+    Alert.alert(`New Card is: ${card}`);
 
     this.props.navigation.navigate("Decks", { itemId: title });
 
@@ -77,7 +83,7 @@ class AddNewCard extends Component {
 
 function mapStateToProps(state, { route }) {
   const { decks } = state;
-  const { title } = route.params;
+  const { title } = route.params.title;
 
   return {
     decks,
@@ -85,7 +91,7 @@ function mapStateToProps(state, { route }) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
+/*function mapDispatchToProps(dispatch) {
   const { question, answer } = this.state;
   const card = cardFormat(question, answer);
   return {
@@ -93,7 +99,7 @@ function mapDispatchToProps(dispatch) {
       dispatch(addCard(title, card));
     }
   };
-}
+}*/
 
 export default connect(mapStateToProps, { addCard })(AddNewCard);
 
