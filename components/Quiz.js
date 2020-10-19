@@ -18,19 +18,17 @@ class Quiz extends React.Component {
     const { cardCount } = this.props;
 
     if (value === "ok") {
-      this.setState({
-        noOfCorrectAns: this.state.noOfCorrectAns + 1,
-        totalNoOfQuestions: this.state.totalNoOfQuestions + 1,
-        index: this.state.index + 1
-        // visibleAns: true
-      });
+      this.setState(prevState => ({
+        noOfCorrectAns: this.prevState.noOfCorrectAns + 1,
+        totalNoOfQuestions: this.prevState.totalNoOfQuestions + 1,
+        index: this.prevState.index + 1
+      }));
     } else {
-      this.setState({
+      this.setState(prevState => ({
         noOfCorrectAns: this.state.noOfCorrectAns,
         totalNoOfQuestions: this.state.totalNoOfQuestions + 1,
         index: this.state.index + 1
-        // visibleAns: false
-      });
+      }));
     }
 
     if (totalNoOfQuestions + 1 === cardCount) {
@@ -104,7 +102,7 @@ class Quiz extends React.Component {
                 });
               }}
             >
-              <Text style={[styles.title]}>Go To Decks</Text>
+              <Text style={[styles.title]}>Go To Deck</Text>
             </TouchableOpacity>
           </View>
         </View>

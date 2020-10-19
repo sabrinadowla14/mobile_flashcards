@@ -44,7 +44,9 @@ class AddNewCard extends Component {
 
     addCard(title, card);
     addCardToDeck(title, card);
-    Alert.alert(`New Card is: ${card}`);
+    Alert.alert(
+      `New Card's  question is: ${card.question} and the answer is: ${card.answer}`
+    );
 
     this.props.navigation.navigate("Decks", { itemId: title });
 

@@ -27,18 +27,20 @@ class DecksDetails extends Component {
     return (
       <SafeAreaView style={styles.container}>
         <ScrollView>
-          {decks
-            ? Object.values(decks) &&
-              Object.values(decks).map(deck => (
-                <DecksView
-                  key={deck.title}
-                  navigation={this.props.navigation}
-                  deckId={deck.title}
-                  cardCount={deck.questions.length}
-                  deck={deck}
-                />
-              ))
-            : null}
+          {decks ? (
+            Object.values(decks) &&
+            Object.values(decks).map(deck => (
+              <DecksView
+                key={deck.title}
+                navigation={this.props.navigation}
+                deckId={deck.title}
+                cardCount={deck.questions.length}
+                deck={deck}
+              />
+            ))
+          ) : (
+            <Text>"No decks created yet"</Text>
+          )}
         </ScrollView>
       </SafeAreaView>
     );
