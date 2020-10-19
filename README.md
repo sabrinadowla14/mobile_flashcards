@@ -79,7 +79,10 @@ Go to file - open simulator - ios 14.0 - iphone11 Pro
 
 ## Screen shots
 
-![GitHub Logo](image1_deck.png)
+![GitHub Logo](/images/deck-list.png)
+Format: ![Decks]
+
+![GitHub Logo](/images/image3_deck.png)
 Format: ![Decks]
 
 ## Acknowledgement:
