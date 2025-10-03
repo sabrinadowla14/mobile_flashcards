@@ -1,10 +1,10 @@
 ## Mobile Flash Card
 
 ```
-For the UdaciCards project - I built a mobile application iOS that allows users to study collections of flashcards. The app allows users to create different categories of flashcards called "decks", add flashcards to those decks, and then take quizzes on those decks.
+For the UdaciCards project, I built an iOS mobile application that allows users to study collections of flashcards. The app allows users to create different categories of flashcards called "decks", add flashcards to those decks, and then take quizzes on those decks.
 ```
 
-## The functionality of mobile flashcard
+## The functionality of mobile flashcards
 
 > DecksDetails.js is the primary view, seen when the app loads.
 
@@ -16,18 +16,18 @@ For the UdaciCards project - I built a mobile application iOS that allows users 
   - Quiz button
   - Add card button
 - The logic for the notification has been implemented.
-  > The App works on iOS device.
+  > The App works on iOS devices.
 
 **Dependencies**
 
-VScode, Xcode, Visual Studio Code(editor)
+VSCode, Xcode, Visual Studio Code(editor)
 expo version: 38.0.8
 node version: 12.14.1
 
-## How to open simulator
+## How to open the simulator
 
 Click on Xcode - choose "open developer tools" - choose simulator
-Go to file - open simulator - ios 14.0 - iphone11 Pro
+Go to file - open simulator - iOS 14.0 - iPhone 11 Pro
 
 ## How to Run
 
@@ -43,11 +43,11 @@ Go to file - open simulator - ios 14.0 - iphone11 Pro
 - Create Project - expo init mobile-flashcards
 - Choose the blank one
 - In the terminal - expo start
-- In the terminal choose option i
+- In the terminal, choose option i
 
 ## ios - CMD + D to open the Developer Menu
 
-## Used ios only
+## Used iOS only
 
 ### Software Installed
 
